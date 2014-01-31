@@ -48,7 +48,6 @@ public partial class Inventory_Asset : System.Web.UI.Page
         //        TreeView1.SelectedNode.ChildNodes.Add(newNode);
         //    }
         //}
-
     }
 
     private void AddChildTreeViewNodes(string parentCode)

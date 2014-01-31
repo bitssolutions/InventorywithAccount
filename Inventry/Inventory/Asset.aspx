@@ -43,7 +43,7 @@
                                         <asp:Button ID="btnEdit" runat="server" Text="Edit" CommandName="Edit" 
                                             TabIndex="3" Width="88px" /> 
                                         <asp:Button ID="btnDelete" runat="server" Text="Delete" CommandName="Delete" 
-                                            TabIndex="4" Width="88px"/>  
+                                            TabIndex="4" Width="88px" OnClientClick="return confirm('Are you sure want to delete?');"/>  
                                     </th>
                                 </tr>
                                 <tr>
