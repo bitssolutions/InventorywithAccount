@@ -211,7 +211,6 @@ public partial class Inventory_Asset : System.Web.UI.Page
             }
             lblMsg.Text = help.Left(msg, msg.Length - 1);
             //lblMsg.Text = "update logic goes here";   
-            
         }
 
         
