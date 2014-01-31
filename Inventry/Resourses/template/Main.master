@@ -1,0 +1,98 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Main.master.cs" Inherits="Resourses_template_Main" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="../dist/css/bootstrap.css" rel="stylesheet" type="text/css" />
+        <link href="../dist/css/style.css" rel="stylesheet" type="text/css" />
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script src="../Resourses/dist/js/bootstrap.js" type="text/javascript"></script>
+		    <style type="text/css">
+			    body{
+				    margin-left:50px;
+				    margin-right:50px;
+				    margin-top:20px;
+				    <%--font-family: myFirstFont;--%>
+			    }
+			    .box{
+				    height: 1200px;
+				    width: 2100px;
+			    }
+			    #footer{
+				    color: #666666;
+				    font-size:16px;
+				    text-shadow: 1px 1px 5px #999999;
+			    }
+			    @font-face
+			    {
+			    font-family: myFirstFont;
+			    src: url('fonts/glyphicons-halflings-regular.ttf'),
+				     url('fonts/glyphicons-halflings-regular.eot'); /* IE9 */
+			    } 
+		    </style>
+</head>
+<body>
+    <div class="navbar navbar-default ">
+			<div class="container">
+				<a href="#" class="navbar-brand">Inventory</a>
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<div class="collapse navbar-collapse navHeaderCollapse">
+					<ul class="nav navbar-nav">
+						<li><a href="../Inventory/Dashboard.aspx" style="font-weight: bolder; font-size: 16px;"><i class="glyphicon glyphicon-home" style="color:white;"></i> Home</a></li>
+						<%--<li><a href="#" style="font-weight: bolder; font-size: 16px;"><i class="glyphicon glyphicon-hdd" style="color:white;"></i> System</a></li>--%>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" style="font-weight: bolder; font-size: 16px;"><i class="glyphicon glyphicon-user" style="color:white;"></i> Master <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><a href="#" style="font-weight: bolder; font-size: 16px;">Product Define</a></li>
+								<li><a href="#" style="font-weight: bolder; font-size: 16px;">Account Define</a>
+                                    <ul class="sub1">
+                                        <li><a href="../Inventory/Asset.aspx" style="font-weight: bolder; font-size: 16px;">Assets</a></li>
+                                        <li><a href="../Inventory/Liabilities.aspx" style="font-weight: bolder; font-size: 16px;">Liabilities</a></li>
+                                        <li><a href="#"  style="font-weight: bolder; font-size: 16px;">Expenses</a></li>
+                                        <li><a href="#"  style="font-weight: bolder; font-size: 16px;">Incomes</a></li>
+                                        <li><a href="#"  style="font-weight: bolder; font-size: 16px;">Cash & Banks</a></li>
+                                        <li><a href="#"  style="font-weight: bolder; font-size: 16px;">Purchase</a></li>
+                                        <li><a href="#"  style="font-weight: bolder; font-size: 16px;">Sales</a></li>
+                                        <li><a href="#"  style="font-weight: bolder; font-size: 16px;">Suppliers (Creditor)</a></li>
+                                        <li><a href="#"  style="font-weight: bolder; font-size: 16px;">Clients (Debitor)</a></li>
+                                        <li><a href="#"  style="font-weight: bolder; font-size: 16px;">Office Staff</a></li>
+                                    </ul>
+                                </li>
+                            
+								<li><a href="#" style="font-weight: bolder; font-size: 16px;">Sub-Delear Create</a></li>
+                                <li><a href="#" style="font-weight: bolder; font-size: 16px;">User Create</a></li>
+                                <li><a href="#" style="font-weight: bolder; font-size: 16px;">Opening Stock</a></li>
+                            </ul>
+						</li>
+						<li><a href="#" style="font-weight: bolder; font-size: 16px;"><i class="glyphicon glyphicon-info-sign" style="color:white;"></i> About</a></li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="../Logout.aspx" style="font-weight: bolder; font-size: 16px;"><i class="glyphicon glyphicon-off" style="color:white;"></i> Logout</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+    <form id="form1" runat="server">
+    <div>
+        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+    </div>
+    </form>
+    <div class="navbar  navbar-fixed-bottom">
+		<hr />
+			<div class="container">
+			<p class="pull-left" id="footer">Copyright &copy; 2013</p>
+			<p class="pull-right" id="footer">Powered by: <a href="#">BITS</a></p>
+			</div>
+		</div>
+		
+</body>
+</html>

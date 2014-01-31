@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Inventry", "Inventry\", "{4F16DCB0-F81A-4A2B-95C4-0AC84B959872}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		ProjectReferences = ""
+		Debug.AspNetCompiler.VirtualPath = "/Inventry"
+		Debug.AspNetCompiler.PhysicalPath = "Inventry\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\Inventry\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/Inventry"
+		Release.AspNetCompiler.PhysicalPath = "Inventry\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\Inventry\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "13805"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4F16DCB0-F81A-4A2B-95C4-0AC84B959872}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F16DCB0-F81A-4A2B-95C4-0AC84B959872}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F16DCB0-F81A-4A2B-95C4-0AC84B959872}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F16DCB0-F81A-4A2B-95C4-0AC84B959872}.Release|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
