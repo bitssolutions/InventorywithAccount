@@ -29,7 +29,8 @@
                        <asp:FormView ID="FormView1" runat="server" 
                             onmodechanging="FormView1_ModeChanging"
                             onitemcommand="FormView1_ItemCommand" Width="488px" 
-                            onitemupdating="FormView1_ItemUpdating" DefaultMode="ReadOnly">
+                            onitemupdating="FormView1_ItemUpdating" DefaultMode="ReadOnly" 
+                            onitemdeleting="FormView1_ItemDeleting">
                             
                             <ItemTemplate>
                                 <table width="450px">

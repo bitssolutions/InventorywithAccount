@@ -129,8 +129,7 @@ public partial class Inventory_Asset : System.Web.UI.Page
 
     protected void FormView1_ModeChanging(object sender, FormViewModeEventArgs e)
     {
-        
-       //this modechanging event should be fired before to perform add edit and deleted command.
+        //this modechanging event should be fired before to perform add edit and deleted command.
     }
 
     protected void FormView1_ItemCommand(object sender, FormViewCommandEventArgs e)
@@ -212,9 +211,6 @@ public partial class Inventory_Asset : System.Web.UI.Page
             lblMsg.Text = help.Left(msg, msg.Length - 1);
             //lblMsg.Text = "update logic goes here";   
         }
-
-        
-       
 
         if (e.CommandName == "cancel")
         {
@@ -315,23 +311,41 @@ public partial class Inventory_Asset : System.Web.UI.Page
 
         if (e.CommandName=="Delete")
         {
-            //delete code goes here
+            alevels = Convert.ToInt32(Diff[2]);
+            atype = Diff[1];
+            parent = Diff[0];
+            TAdd = null;
+            PAdd = null;
+            CPerson = null;
+            Tel = null;
+            Mob = null;
+            Email = null;
+            Web = null;
+            Rem = null;
+            string acode = Diff[0];
+            string aname = Diff[0];
+            string ucode = Session["usercode"].ToString();
+            string msg = accountobj.AddAccounts(parent, acode, aname, atype, alevels, owner, ucode, "D", lblDetail.Text, TAdd, PAdd, CPerson, Tel, Mob, Email, Web, Rem);
+            string chkmsg = help.Right(msg, 1);
+            if (chkmsg == "1")
+            {
+                clearnloadformview(sender, e);
+            }
+            lblMsg.Text = help.Left(msg, msg.Length - 1);
         }
-       
     }
     
     
     protected void btnAgHead_Click(object sender, EventArgs e)
     {
         lblType.Text = "G";
-      
     }
 
     protected void btnAcHead_Click(object sender, EventArgs e)
     {
         lblType.Text = "A";
-        
-    }
+        }
+
     protected void chkIsDetail_CheckedChanged(object sender, EventArgs e)
     {
         if (((CheckBox)FormView1.FindControl("chkIsDetail")).Checked==true)
@@ -346,65 +360,11 @@ public partial class Inventory_Asset : System.Web.UI.Page
 
     protected void FormView1_ItemUpdating(object sender, FormViewUpdateEventArgs e)
     {
-
+        //
     }
 
-    //protected void btnUpdate_Click(object sender, EventArgs e)
-    //{
-    //    string atype = "", parent = "", owner = "", TAdd, PAdd, CPerson, Tel, Mob, Email, Web, Rem;
-    //    int alevels;
-    //    string chkValue = TreeView1.SelectedNode.Value;
-    //    string[] Diff = TreeView1.SelectedNode.Value.Split('-');
-
-    //    alevels = Convert.ToInt32(Diff[2]);
-    //    string[] DiffUpDt = TreeView1.SelectedNode.Parent.Value.Split('-');
-    //    parent = DiffUpDt[0];
-    //    atype = atype = Diff[1];
-    //    if (lblDetail.Text == "Y")
-    //    {
-    //        TAdd = ((TextBox)FormView1.FindControl("txtEditTempAddress")).Text;
-    //        PAdd = ((TextBox)FormView1.FindControl("txtEditPermanentAddress")).Text;
-    //        CPerson = ((TextBox)FormView1.FindControl("txtEditConPerson")).Text;
-    //        Tel = ((TextBox)FormView1.FindControl("txtEditTelephone")).Text;
-    //        Mob = ((TextBox)FormView1.FindControl("txtEditMobile")).Text;
-    //        Email = ((TextBox)FormView1.FindControl("txtEditEmail")).Text;
-    //        Web = ((TextBox)FormView1.FindControl("txtEditWebPage")).Text;
-    //        Rem = ((TextBox)FormView1.FindControl("txtEditRemarks")).Text;
-    //    }
-    //    else
-    //    {
-    //        TAdd = null;
-    //        PAdd = null;
-    //        CPerson = null;
-    //        Tel = null;
-    //        Mob = null;
-    //        Email = null;
-    //        Web = null;
-    //        Rem = null;
-    //    }
-
-    //    if (((RadioButton)FormView1.FindControl("rbdCommon")).Checked)
-    //    {
-    //        owner = "Comm";
-    //    }
-    //    else if (((RadioButton)FormView1.FindControl("rbdSubDealer")).Checked)
-    //    {
-    //        owner = "Sub";
-    //    }
-    //    else
-    //    {
-    //        owner = Session["dealer"].ToString();
-    //    }
-    //    string acode = ((TextBox)FormView1.FindControl("txtEditAccountCode")).Text;
-    //    string aname = ((TextBox)FormView1.FindControl("txtEditAccountDescription")).Text;
-    //    string ucode = Session["usercode"].ToString();
-    //    string msg = accountobj.AddAccounts(parent, acode, aname, atype, alevels, owner, ucode, "E", lblDetail.Text, TAdd, PAdd, CPerson, Tel, Mob, Email, Web, Rem);
-
-    //    string chkmsg = help.Right(msg, 1);
-    //    //if (chkmsg == "1")
-    //    //{
-    //    //    clearnloadformview(sender, e);
-    //    //}
-    //    //lblMsg.Text = help.Left(msg, msg.Length - 1);
-    //}
+    protected void FormView1_ItemDeleting(object sender, FormViewDeleteEventArgs e)
+    {
+        //
+    }
 }
