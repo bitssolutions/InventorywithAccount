@@ -160,8 +160,6 @@ public partial class Inventory_Asset : System.Web.UI.Page
 
         if (e.CommandName == "edit")
         {
-            //if (FormView1.CurrentMode == FormViewMode.Edit)
-            //{
             alevels = Convert.ToInt32(Diff[2]);
             string[] DiffUpDt = TreeView1.SelectedNode.Parent.Value.Split('-');
             parent = DiffUpDt[0];
@@ -213,7 +211,7 @@ public partial class Inventory_Asset : System.Web.UI.Page
             }
             lblMsg.Text = help.Left(msg, msg.Length - 1);
             //lblMsg.Text = "update logic goes here";   
-            // }
+            
         }
 
         
