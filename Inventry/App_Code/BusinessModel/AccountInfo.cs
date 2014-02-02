@@ -10,7 +10,7 @@ using System.Data.SqlClient;
 /// </summary>
 public class AccountInfo
 {
-    public DataTable getAllAccount(string ucode, string type)
+    public DataTable LoadAccountDetails(string ucode, string type)
     {
         SqlParameter[] param = new SqlParameter[2];
         param[0] = new SqlParameter("@Code", ucode);

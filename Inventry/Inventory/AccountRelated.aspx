@@ -368,7 +368,7 @@
                                     
                                 %>
                                 <%
-                                    System.Data.DataTable acgroup = accountinfo.getAllAccount(lblUCode.Text, lblAcType.Text);
+                                    System.Data.DataTable acgroup = accountinfo.LoadAccountDetails(lblUCode.Text, lblAcType.Text);
                                     if (acgroup.Rows.Count>0)
                                     {
                                         ((TextBox)FormView1.FindControl("txtNewAccountGrp")).Text = acgroup.Rows[0][1].ToString();

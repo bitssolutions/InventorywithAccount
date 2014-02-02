@@ -27,7 +27,7 @@ public partial class Inventory_AccountRelated : System.Web.UI.Page
 
     private void AddTopTreeViewNodes()
     {
-        string pcode = Request.QueryString["ParentCode"].ToString();
+        string pcode = Request.QueryString["Account"].ToString();
         TreeNode newNodes = new TreeNode("Assets", pcode + "-G-3-N-N");
         TreeView1.Nodes.Add(newNodes);
         TreeView1.Nodes[0].Selected = true;
@@ -52,7 +52,7 @@ public partial class Inventory_AccountRelated : System.Web.UI.Page
 
     private void AddChildTreeViewNodes(string parentCode)
     {
-        DataTable treeViewDatas = obj.getAssets(parentCode, Session["dealer"].ToString());
+        DataTable treeViewDatas = obj.LoadAccountListTreeView(parentCode, Session["dealer"].ToString());
         if (treeViewDatas.Rows.Count > 0)
         {
             DataView view = new DataView(treeViewDatas);
@@ -92,7 +92,7 @@ public partial class Inventory_AccountRelated : System.Web.UI.Page
     public void loadFormView()
     {
         string[] Diff = TreeView1.SelectedNode.Value.Split('-');
-        DataTable accountinfo = infobj.getAllAccount(Diff[0], Diff[1]);
+        DataTable accountinfo = infobj.LoadAccountDetails(Diff[0], Diff[1]);
         if (accountinfo.Rows.Count > 0)
         {
             FormView1.DataSource = accountinfo;
@@ -143,7 +143,7 @@ public partial class Inventory_AccountRelated : System.Web.UI.Page
             if (Diff[3] == "Y")
             {
                 FormView1.ChangeMode(FormViewMode.Edit);
-                DataTable accountinfo = infobj.getAllAccount(Diff[0], "A");
+                DataTable accountinfo = infobj.LoadAccountDetails(Diff[0], "A");
                 if (accountinfo.Rows.Count > 0)
                 {
                     FormView1.DataSource = accountinfo;
@@ -200,7 +200,7 @@ public partial class Inventory_AccountRelated : System.Web.UI.Page
             string acode = ((TextBox)FormView1.FindControl("txtEditAccountCode")).Text;
             string aname = ((TextBox)FormView1.FindControl("txtEditAccountDescription")).Text;
             string ucode = Session["usercode"].ToString();
-            string msg = accountobj.AddAccounts(parent, acode, aname, atype, alevels, owner, ucode, "E", lblDetail.Text, TAdd, PAdd, CPerson, Tel, Mob, Email, Web, Rem);
+            string msg = accountobj.AllAccountRelated(parent, acode, aname, atype, alevels, owner, ucode, "E", lblDetail.Text, TAdd, PAdd, CPerson, Tel, Mob, Email, Web, Rem);
 
             string chkmsg = help.Right(msg, 1);
             if (chkmsg == "1")
@@ -222,7 +222,7 @@ public partial class Inventory_AccountRelated : System.Web.UI.Page
         if (e.CommandName == "AcGrp")
         {
             FormView1.ChangeMode(FormViewMode.Insert);
-            DataTable accountinfo = infobj.getAllAccount(Diff[0], "A");
+            DataTable accountinfo = infobj.LoadAccountDetails(Diff[0], "A");
             if (accountinfo.Rows.Count > 0)
             {
                 FormView1.DataSource = accountinfo;
@@ -234,7 +234,7 @@ public partial class Inventory_AccountRelated : System.Web.UI.Page
         if (e.CommandName == "AcHead")
         {
             FormView1.ChangeMode(FormViewMode.Insert);
-            DataTable accountinfo = infobj.getAllAccount(Diff[0], "A");
+            DataTable accountinfo = infobj.LoadAccountDetails(Diff[0], "A");
             if (accountinfo.Rows.Count > 0)
             {
                 FormView1.DataSource = accountinfo;
@@ -296,7 +296,7 @@ public partial class Inventory_AccountRelated : System.Web.UI.Page
             string acode = ((TextBox)FormView1.FindControl("txtNewAccountCode")).Text;
             string aname = ((TextBox)FormView1.FindControl("txtNewAccountDescription")).Text;
             string ucode = Session["usercode"].ToString();
-            string msg = accountobj.AddAccounts(parent, acode, aname, atype, alevels, owner, ucode, "I", lblDetail.Text, TAdd, PAdd, CPerson, Tel, Mob, Email, Web, Rem);
+            string msg = accountobj.AllAccountRelated(parent, acode, aname, atype, alevels, owner, ucode, "I", lblDetail.Text, TAdd, PAdd, CPerson, Tel, Mob, Email, Web, Rem);
 
             string chkmsg = help.Right(msg, 1);
             if (chkmsg == "1")
@@ -324,7 +324,7 @@ public partial class Inventory_AccountRelated : System.Web.UI.Page
             string acode = Diff[0];
             string aname = Diff[0];
             string ucode = Session["usercode"].ToString();
-            string msg = accountobj.AddAccounts(parent, acode, aname, atype, alevels, owner, ucode, "D", lblDetail.Text, TAdd, PAdd, CPerson, Tel, Mob, Email, Web, Rem);
+            string msg = accountobj.AllAccountRelated(parent, acode, aname, atype, alevels, owner, ucode, "D", lblDetail.Text, TAdd, PAdd, CPerson, Tel, Mob, Email, Web, Rem);
             string chkmsg = help.Right(msg, 1);
             if (chkmsg == "1")
             {
