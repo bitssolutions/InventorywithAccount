@@ -5,36 +5,32 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
-using System.Web.UI.HtmlControls;
 
-
-public partial class Inventory_Asset : System.Web.UI.Page
+public partial class Inventory_AccountRelated : System.Web.UI.Page
 {
     AccountListTreeView obj = new AccountListTreeView();
     AccountInfo infobj = new AccountInfo();
     AccountRelated accountobj = new AccountRelated();
-    Helper help = new Helper(); 
+    Helper help = new Helper();
     //string pcode="AT1";
-    
     protected void Page_Load(object sender, EventArgs e)
     {
-         
-      if (!IsPostBack)
+        if (!IsPostBack)
         {
-            
+
             TreeView1.Nodes.Clear();
             AddTopTreeViewNodes();
             //lblDetail.Text = "N";
 
         }
     }
-    
+
     private void AddTopTreeViewNodes()
     {
         string pcode = Request.QueryString["ParentCode"].ToString();
-        TreeNode newNodes = new TreeNode("Assets", pcode+"-G-3-N-N");
+        TreeNode newNodes = new TreeNode("Assets", pcode + "-G-3-N-N");
         TreeView1.Nodes.Add(newNodes);
-        TreeView1.Nodes[0].Selected=true ;
+        TreeView1.Nodes[0].Selected = true;
         TreeView1.SelectedNode.ChildNodes.Clear();
         AddChildTreeViewNodes(pcode);
         TreeView1.ExpandAll();
@@ -56,7 +52,7 @@ public partial class Inventory_Asset : System.Web.UI.Page
 
     private void AddChildTreeViewNodes(string parentCode)
     {
-        DataTable treeViewDatas = obj.getAssets(parentCode,Session["dealer"].ToString());
+        DataTable treeViewDatas = obj.getAssets(parentCode, Session["dealer"].ToString());
         if (treeViewDatas.Rows.Count > 0)
         {
             DataView view = new DataView(treeViewDatas);
@@ -101,11 +97,11 @@ public partial class Inventory_Asset : System.Web.UI.Page
         {
             FormView1.DataSource = accountinfo;
             FormView1.DataBind();
-            if (accountinfo.Rows[0][7].ToString()=="Comm")
-	        {
+            if (accountinfo.Rows[0][7].ToString() == "Comm")
+            {
                 ((RadioButton)FormView1.FindControl("rbdCommon")).Checked = true;
-	        }
-            else if (accountinfo.Rows[0][7].ToString()=="Sub")
+            }
+            else if (accountinfo.Rows[0][7].ToString() == "Sub")
             {
                 ((RadioButton)FormView1.FindControl("rbdSubDealer")).Checked = true;
             }
@@ -139,7 +135,7 @@ public partial class Inventory_Asset : System.Web.UI.Page
     {
         string atype = "", parent = "", owner = "", TAdd, PAdd, CPerson, Tel, Mob, Email, Web, Rem;
         int alevels;
-        string chkValue=TreeView1.SelectedNode.Value;
+        string chkValue = TreeView1.SelectedNode.Value;
         string[] Diff = TreeView1.SelectedNode.Value.Split('-');
 
         if (e.CommandName == "Edit")
@@ -247,9 +243,9 @@ public partial class Inventory_Asset : System.Web.UI.Page
             }
         }
 
-        if (e.CommandName=="create")
+        if (e.CommandName == "create")
         {
-           if (Diff[1]=="A")
+            if (Diff[1] == "A")
             {
                 string[] DiffUpDt = TreeView1.SelectedNode.Parent.Value.Split('-');
                 alevels = Convert.ToInt32(DiffUpDt[2]) + 1;
@@ -261,58 +257,58 @@ public partial class Inventory_Asset : System.Web.UI.Page
                 alevels = Convert.ToInt32(DiffUpDt[2]) + 1;
                 parent = DiffUpDt[0];
             }
-           if (lblDetail.Text == "Y")
-           {
-             TAdd = ((TextBox)FormView1.FindControl("txtNewTempAddress")).Text;
-              PAdd = ((TextBox)FormView1.FindControl("txtNewPermanentAddress")).Text;
-              CPerson = ((TextBox)FormView1.FindControl("txtNewConPerson")).Text;
-              Tel = ((TextBox)FormView1.FindControl("txtNewTelephone")).Text;
-              Mob = ((TextBox)FormView1.FindControl("txtNewMobile")).Text;
-              Email = ((TextBox)FormView1.FindControl("txtNewEmail")).Text;
-              Web = ((TextBox)FormView1.FindControl("txtNewWebPage")).Text;
-              Rem = ((TextBox)FormView1.FindControl("txtNewRemarks")).Text;
-             
-           }
-           else
-           {
-             TAdd = null; 
-             PAdd = null;
-             CPerson = null;
-             Tel = null;
-             Mob = null;
-             Email = null;
-             Web = null;
-             Rem = null;
-           }
-           if (((RadioButton)FormView1.FindControl("rbdCommon")).Checked)
-           {
-               owner = "Comm";
-           }
-           else if (((RadioButton)FormView1.FindControl("rbdSubDealer")).Checked)
-           {
-               owner = "Sub";
-           }
-           else
-           {
-               owner = Session["dealer"].ToString();
-           }
-           atype = lblType.Text;
-           string acode = ((TextBox)FormView1.FindControl("txtNewAccountCode")).Text;
-           string aname = ((TextBox)FormView1.FindControl("txtNewAccountDescription")).Text;
-           string ucode = Session["usercode"].ToString();
-           string msg = accountobj.AddAccounts(parent, acode, aname, atype, alevels, owner, ucode, "I",lblDetail.Text, TAdd, PAdd, CPerson, Tel, Mob, Email, Web, Rem);
+            if (lblDetail.Text == "Y")
+            {
+                TAdd = ((TextBox)FormView1.FindControl("txtNewTempAddress")).Text;
+                PAdd = ((TextBox)FormView1.FindControl("txtNewPermanentAddress")).Text;
+                CPerson = ((TextBox)FormView1.FindControl("txtNewConPerson")).Text;
+                Tel = ((TextBox)FormView1.FindControl("txtNewTelephone")).Text;
+                Mob = ((TextBox)FormView1.FindControl("txtNewMobile")).Text;
+                Email = ((TextBox)FormView1.FindControl("txtNewEmail")).Text;
+                Web = ((TextBox)FormView1.FindControl("txtNewWebPage")).Text;
+                Rem = ((TextBox)FormView1.FindControl("txtNewRemarks")).Text;
 
-           string chkmsg = help.Right(msg, 1);
-           if (chkmsg == "1")
-           {
-               clearnloadformview(sender, e);
-               //FormView1.ChangeMode(FormViewMode.ReadOnly);
-               //TreeView1_SelectedNodeChanged(sender, e);
-           }
-           lblMsg.Text = help.Left(msg, msg.Length - 1);
+            }
+            else
+            {
+                TAdd = null;
+                PAdd = null;
+                CPerson = null;
+                Tel = null;
+                Mob = null;
+                Email = null;
+                Web = null;
+                Rem = null;
+            }
+            if (((RadioButton)FormView1.FindControl("rbdCommon")).Checked)
+            {
+                owner = "Comm";
+            }
+            else if (((RadioButton)FormView1.FindControl("rbdSubDealer")).Checked)
+            {
+                owner = "Sub";
+            }
+            else
+            {
+                owner = Session["dealer"].ToString();
+            }
+            atype = lblType.Text;
+            string acode = ((TextBox)FormView1.FindControl("txtNewAccountCode")).Text;
+            string aname = ((TextBox)FormView1.FindControl("txtNewAccountDescription")).Text;
+            string ucode = Session["usercode"].ToString();
+            string msg = accountobj.AddAccounts(parent, acode, aname, atype, alevels, owner, ucode, "I", lblDetail.Text, TAdd, PAdd, CPerson, Tel, Mob, Email, Web, Rem);
+
+            string chkmsg = help.Right(msg, 1);
+            if (chkmsg == "1")
+            {
+                clearnloadformview(sender, e);
+                //FormView1.ChangeMode(FormViewMode.ReadOnly);
+                //TreeView1_SelectedNodeChanged(sender, e);
+            }
+            lblMsg.Text = help.Left(msg, msg.Length - 1);
         }
 
-        if (e.CommandName=="Delete")
+        if (e.CommandName == "Delete")
         {
             alevels = Convert.ToInt32(Diff[2]);
             atype = Diff[1];
@@ -337,8 +333,8 @@ public partial class Inventory_Asset : System.Web.UI.Page
             lblMsg.Text = help.Left(msg, msg.Length - 1);
         }
     }
-    
-    
+
+
     protected void btnAgHead_Click(object sender, EventArgs e)
     {
         lblType.Text = "G";
@@ -347,11 +343,11 @@ public partial class Inventory_Asset : System.Web.UI.Page
     protected void btnAcHead_Click(object sender, EventArgs e)
     {
         lblType.Text = "A";
-        }
+    }
 
     protected void chkIsDetail_CheckedChanged(object sender, EventArgs e)
     {
-        if (((CheckBox)FormView1.FindControl("chkIsDetail")).Checked==true)
+        if (((CheckBox)FormView1.FindControl("chkIsDetail")).Checked == true)
         {
             lblDetail.Text = "Y";
         }

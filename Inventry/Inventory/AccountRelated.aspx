@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Resourses/template/Main.master" AutoEventWireup="true" CodeFile="Asset.aspx.cs" Inherits="Inventory_Asset" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Resourses/template/Main.master" AutoEventWireup="true" CodeFile="AccountRelated.aspx.cs" Inherits="Inventory_AccountRelated" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <div class="container-fluid">
@@ -570,6 +570,5 @@
             </div>
         </div>
     </div>
-
 </asp:Content>
 
