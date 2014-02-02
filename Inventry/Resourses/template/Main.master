@@ -53,16 +53,16 @@
 								<li><a href="#" style="font-weight: bolder; font-size: 16px;">Product Define</a></li>
 								<li><a href="#" style="font-weight: bolder; font-size: 16px;">Account Define</a>
                                     <ul class="sub1">
-                                        <li><a href="../Inventory/Asset.aspx" style="font-weight: bolder; font-size: 16px;">Assets</a></li>
-                                        <li><a href="../Inventory/Liabilities.aspx" style="font-weight: bolder; font-size: 16px;">Liabilities</a></li>
-                                        <li><a href="#"  style="font-weight: bolder; font-size: 16px;">Expenses</a></li>
-                                        <li><a href="#"  style="font-weight: bolder; font-size: 16px;">Incomes</a></li>
-                                        <li><a href="#"  style="font-weight: bolder; font-size: 16px;">Cash & Banks</a></li>
-                                        <li><a href="#"  style="font-weight: bolder; font-size: 16px;">Purchase</a></li>
-                                        <li><a href="#"  style="font-weight: bolder; font-size: 16px;">Sales</a></li>
-                                        <li><a href="#"  style="font-weight: bolder; font-size: 16px;">Suppliers (Creditor)</a></li>
-                                        <li><a href="#"  style="font-weight: bolder; font-size: 16px;">Clients (Debitor)</a></li>
-                                        <li><a href="#"  style="font-weight: bolder; font-size: 16px;">Office Staff</a></li>
+                                        <li><a href="../Inventory/Asset.aspx?ParentCode=AT1" style="font-weight: bolder; font-size: 16px;">Assets</a></li>
+                                        <li><a href="../Inventory/Asset.aspx?ParentCode=LL1" style="font-weight: bolder; font-size: 16px;">Liabilities</a></li>
+                                        <li><a href="../Inventory/Asset.aspx?ParentCode=TE1"  style="font-weight: bolder; font-size: 16px;">Expenses</a></li>
+                                        <li><a href="../Inventory/Asset.aspx?ParentCode=II1"  style="font-weight: bolder; font-size: 16px;">Incomes</a></li>
+                                        <li><a href="../Inventory/Asset.aspx?ParentCode=CB1"  style="font-weight: bolder; font-size: 16px;">Cash & Banks</a></li>
+                                        <li><a href="../Inventory/Asset.aspx?ParentCode=DE1"  style="font-weight: bolder; font-size: 16px;">Purchase</a></li>
+                                        <li><a href="../Inventory/Asset.aspx?ParentCode=DI1"  style="font-weight: bolder; font-size: 16px;">Sales</a></li>
+                                        <li><a href="../Inventory/Asset.aspx?ParentCode=SC1"  style="font-weight: bolder; font-size: 16px;">Suppliers (Creditor)</a></li>
+                                        <li><a href="../Inventory/Asset.aspx?ParentCode=SD1"  style="font-weight: bolder; font-size: 16px;">Clients (Debitor)</a></li>
+                                        <li><a href="../Inventory/Asset.aspx?ParentCode=OF1"  style="font-weight: bolder; font-size: 16px;">Office Staff</a></li>
                                     </ul>
                                 </li>
                             

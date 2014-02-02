@@ -26,6 +26,7 @@
                         <asp:Label ID="lblIsDetail" runat="server" Text="" Visible="false"></asp:Label>
                         <asp:Label ID="lblUCode" runat="server" Text="" Visible="false"></asp:Label>
                         <asp:Label ID="lblAcType" runat="server" Text="" Visible="false"></asp:Label>
+                        <asp:Label ID="lblParentCode" runat="server" Text="" Visible="true"></asp:Label>
                        <asp:FormView ID="FormView1" runat="server" 
                             onmodechanging="FormView1_ModeChanging"
                             onitemcommand="FormView1_ItemCommand" Width="488px" 

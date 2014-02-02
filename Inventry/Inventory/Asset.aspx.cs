@@ -14,20 +14,24 @@ public partial class Inventory_Asset : System.Web.UI.Page
     AccountInfo infobj = new AccountInfo();
     AccountRelated accountobj = new AccountRelated();
     Helper help = new Helper(); 
-    string pcode = "AT1"; 
+    //string pcode="AT1";
+    
     protected void Page_Load(object sender, EventArgs e)
     {
-      
+         
       if (!IsPostBack)
         {
+            
             TreeView1.Nodes.Clear();
             AddTopTreeViewNodes();
             //lblDetail.Text = "N";
+
         }
     }
-
+    
     private void AddTopTreeViewNodes()
     {
+        string pcode = Request.QueryString["ParentCode"].ToString();
         TreeNode newNodes = new TreeNode("Assets", pcode+"-G-3-N-N");
         TreeView1.Nodes.Add(newNodes);
         TreeView1.Nodes[0].Selected=true ;

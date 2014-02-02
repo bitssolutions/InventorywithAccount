@@ -10,7 +10,7 @@ using System.Data;
 /// </summary>
 public class AccountListTreeView
 {
-    public static string var = "";
+    
     public DataTable getAssets(string parent,string owner)
     {
         //string parent = "AT1";
