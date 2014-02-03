@@ -24,9 +24,7 @@
                         <asp:Label ID="lblType" runat="server" Text="" Visible="false"></asp:Label>
                         <asp:Label ID="lblDetail" runat="server" Text="" Visible="false"></asp:Label>
                         <asp:Label ID="lblIsDetail" runat="server" Text="" Visible="false"></asp:Label>
-                        <asp:Label ID="lblUCode" runat="server" Text="" Visible="false"></asp:Label>
-                        <asp:Label ID="lblAcType" runat="server" Text="" Visible="false"></asp:Label>
-                        <asp:Label ID="lblParentCode" runat="server" Text="" Visible="true"></asp:Label>
+                     
                        <asp:FormView ID="FormView1" runat="server" 
                             onmodechanging="FormView1_ModeChanging"
                             onitemcommand="FormView1_ItemCommand" Width="488px" 
@@ -153,14 +151,14 @@
                                         <td>
                                             Account Group</td>
                                         <td>
-                                            <asp:TextBox ID="txtEditAccountGrp" Text='<%#Bind("PName") %>' runat="server" Width="200px"></asp:TextBox>
+                                            <asp:TextBox ID="txtEditAccountGrp" Text='<%#Bind("PName") %>' runat="server" Width="200px" ReadOnly="true"></asp:TextBox>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
                                             Account Code</td>
                                         <td>
-                                            <asp:TextBox ID="txtEditAccountCode" Text='<%#Bind("Code") %>' runat="server" Width="200px"></asp:TextBox>
+                                            <asp:TextBox ID="txtEditAccountCode" Text='<%#Bind("Code") %>' runat="server" Width="200px" ReadOnly="true"></asp:TextBox>
                                         </td>
                                     </tr>
                                     <tr>
@@ -343,21 +341,16 @@
                                 AccountRelated accountobj = new AccountRelated();
                                 AccountInfo accountinfo=new AccountInfo();
                                 string[] Diff = TreeView1.SelectedNode.Value.Split('-');
-                                if (Diff[1] == "A")
+                               if (Diff[1] == "A")
                                 {
                                     string[] DiffUpDt = TreeView1.SelectedNode.Parent.Value.Split('-');
-                                    lblUCode.Text = DiffUpDt[0];
-                                    lblAcType.Text = DiffUpDt[1];
-                                }
+                                    ((TextBox)FormView1.FindControl("txtNewAccountGrp")).Text = TreeView1.SelectedNode.Parent.Text;
+                                  }
                                 else
                                 {
                                     string[] DiffUpDt = TreeView1.SelectedNode.Value.Split('-');
-                                    lblUCode.Text = DiffUpDt[0];
-                                    lblAcType.Text = DiffUpDt[1];
+                                    ((TextBox)FormView1.FindControl("txtNewAccountGrp")).Text = TreeView1.SelectedNode.Text;
                                 }
-                                //lblUCode.Text = Diff[0];
-                                //lblAcType.Text = Diff[1];
-                                
                              %>
                                 <%
                                     System.Data.DataTable accode = accountobj.generateMaxNumber("AC", "HO");
@@ -367,13 +360,7 @@
                                     }
                                     
                                 %>
-                                <%
-                                    System.Data.DataTable acgroup = accountinfo.LoadAccountDetails(lblUCode.Text, lblAcType.Text);
-                                    if (acgroup.Rows.Count>0)
-                                    {
-                                        ((TextBox)FormView1.FindControl("txtNewAccountGrp")).Text = acgroup.Rows[0][1].ToString();
-                                    }    
-                                 %>
+                            
                                  <table style="width: 450px">
                                    <tr>
                                     <th colspan="2">
@@ -386,14 +373,14 @@
                                         <td>
                                             Account Group</td>
                                         <td>
-                                            <asp:TextBox ID="txtNewAccountGrp" Text='' runat="server" Width="200px"></asp:TextBox>
+                                            <asp:TextBox ID="txtNewAccountGrp" Text='' runat="server" Width="200px" ReadOnly="true"></asp:TextBox>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
                                             Account Code</td>
                                         <td>
-                                            <asp:TextBox ID="txtNewAccountCode" Text='' runat="server" Width="200px"></asp:TextBox>
+                                            <asp:TextBox ID="txtNewAccountCode" Text='' runat="server" Width="200px" ReadOnly="true"></asp:TextBox>
                                         </td>
                                     </tr>
                                     <tr>

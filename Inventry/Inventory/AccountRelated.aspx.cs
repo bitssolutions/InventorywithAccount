@@ -12,23 +12,27 @@ public partial class Inventory_AccountRelated : System.Web.UI.Page
     AccountInfo infobj = new AccountInfo();
     AccountRelated accountobj = new AccountRelated();
     Helper help = new Helper();
-    //string pcode="AT1";
+   
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
         {
-
             TreeView1.Nodes.Clear();
             AddTopTreeViewNodes();
             //lblDetail.Text = "N";
-
         }
     }
 
     private void AddTopTreeViewNodes()
     {
         string pcode = Request.QueryString["Account"].ToString();
-        TreeNode newNodes = new TreeNode("Assets", pcode + "-G-3-N-N");
+        string pname=null;
+        DataTable AcName = infobj.LoadAccountDetails(pcode, "G");
+        if (AcName.Rows.Count>0)
+        {
+            pname = AcName.Rows[0][4].ToString();
+        }
+        TreeNode newNodes = new TreeNode(pname, pcode + "-G-3-N-N");
         TreeView1.Nodes.Add(newNodes);
         TreeView1.Nodes[0].Selected = true;
         TreeView1.SelectedNode.ChildNodes.Clear();
@@ -37,17 +41,6 @@ public partial class Inventory_AccountRelated : System.Web.UI.Page
         loadFormView();
         lblMsg.Text = "";
 
-        //DataTable treeViewData = obj.getAssets("AT1", Session["dealer"].ToString());
-        //if (treeViewData.Rows.Count > 0)
-        //{
-        //    DataView view = new DataView(treeViewData);
-        //    foreach (DataRowView row in view)
-        //    {
-        //        TreeNode newNode = new TreeNode(row["AName"].ToString(), row["Diff"].ToString());
-        //        //TreeView1.Nodes.Add(newNode);
-        //        TreeView1.SelectedNode.ChildNodes.Add(newNode);
-        //    }
-        //}
     }
 
     private void AddChildTreeViewNodes(string parentCode)
@@ -214,9 +207,6 @@ public partial class Inventory_AccountRelated : System.Web.UI.Page
         if (e.CommandName == "cancel")
         {
             clearnloadformview(sender, e);
-            //FormView1.ChangeMode(FormViewMode.ReadOnly);
-            //TreeView1_SelectedNodeChanged(sender, e);
-            //lblDetail.Text = "N";
         }
 
         if (e.CommandName == "AcGrp")
@@ -302,8 +292,6 @@ public partial class Inventory_AccountRelated : System.Web.UI.Page
             if (chkmsg == "1")
             {
                 clearnloadformview(sender, e);
-                //FormView1.ChangeMode(FormViewMode.ReadOnly);
-                //TreeView1_SelectedNodeChanged(sender, e);
             }
             lblMsg.Text = help.Left(msg, msg.Length - 1);
         }
