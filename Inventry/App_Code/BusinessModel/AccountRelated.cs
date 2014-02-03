@@ -10,6 +10,7 @@ using System.Data.SqlClient;
 /// </summary>
 public class AccountRelated
 {
+    //account related stard
     public string AllAccountRelated(string parent,string code,string aname,string type,int levels,string owner,string usercode,string status,string detailvalues,string addt,string addp,string conperson,string telephone,string mobile,string email,string webpage,string remarks)
     {
         SqlParameter[] param = new SqlParameter[18];
@@ -35,7 +36,7 @@ public class AccountRelated
         DataAccessLayer.ExecuteProc("AccountRelated", param);
         return (param[17].Value.ToString()).Trim();
     }
-
+   
    
     public DataTable generateMaxNumber(string type, string owner)
     {
@@ -44,4 +45,27 @@ public class AccountRelated
         param[1] = new SqlParameter("@Owner", owner);
         return DataAccessLayer.getTable("GenerateMaxNumber", param);
     }
+    //account related end
+
+    // to load treeview structure
+    public DataTable LoadAccountListTreeView(string parent, string owner)
+    {
+        SqlParameter[] param = new SqlParameter[2];
+        param[0] = new SqlParameter("@Parent", parent);
+        param[1] = new SqlParameter("@Owner", owner);
+        return DataAccessLayer.getTable("AccountListsTreeView", param);
+    }
+    //end load treeview structure
+
+    //load accountinfo
+    public DataTable LoadAccountDetails(string ucode, string type)
+    {
+        SqlParameter[] param = new SqlParameter[2];
+        param[0] = new SqlParameter("@Code", ucode);
+        param[1] = new SqlParameter("@Type", type);
+        return DataAccessLayer.getTable("AccountInfo", param);
+    }
+
+   
+    //end load accountinfo
 }

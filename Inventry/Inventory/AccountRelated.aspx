@@ -339,7 +339,7 @@
                             
                             <%
                                 AccountRelated accountobj = new AccountRelated();
-                                AccountInfo accountinfo=new AccountInfo();
+                                
                                 string[] Diff = TreeView1.SelectedNode.Value.Split('-');
                                if (Diff[1] == "A")
                                 {

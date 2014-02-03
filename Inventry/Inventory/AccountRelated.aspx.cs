@@ -8,8 +8,7 @@ using System.Data;
 
 public partial class Inventory_AccountRelated : System.Web.UI.Page
 {
-    AccountListTreeView obj = new AccountListTreeView();
-    AccountInfo infobj = new AccountInfo();
+  
     AccountRelated accountobj = new AccountRelated();
     Helper help = new Helper();
    
@@ -27,7 +26,7 @@ public partial class Inventory_AccountRelated : System.Web.UI.Page
     {
         string pcode = Request.QueryString["Account"].ToString();
         string pname=null;
-        DataTable AcName = infobj.LoadAccountDetails(pcode, "G");
+        DataTable AcName = accountobj.LoadAccountDetails(pcode, "G");
         if (AcName.Rows.Count>0)
         {
             pname = AcName.Rows[0][4].ToString();
@@ -45,7 +44,7 @@ public partial class Inventory_AccountRelated : System.Web.UI.Page
 
     private void AddChildTreeViewNodes(string parentCode)
     {
-        DataTable treeViewDatas = obj.LoadAccountListTreeView(parentCode, Session["dealer"].ToString());
+        DataTable treeViewDatas = accountobj.LoadAccountListTreeView(parentCode, Session["dealer"].ToString());
         if (treeViewDatas.Rows.Count > 0)
         {
             DataView view = new DataView(treeViewDatas);
@@ -85,7 +84,7 @@ public partial class Inventory_AccountRelated : System.Web.UI.Page
     public void loadFormView()
     {
         string[] Diff = TreeView1.SelectedNode.Value.Split('-');
-        DataTable accountinfo = infobj.LoadAccountDetails(Diff[0], Diff[1]);
+        DataTable accountinfo = accountobj.LoadAccountDetails(Diff[0], Diff[1]);
         if (accountinfo.Rows.Count > 0)
         {
             FormView1.DataSource = accountinfo;
@@ -136,7 +135,7 @@ public partial class Inventory_AccountRelated : System.Web.UI.Page
             if (Diff[3] == "Y")
             {
                 FormView1.ChangeMode(FormViewMode.Edit);
-                DataTable accountinfo = infobj.LoadAccountDetails(Diff[0], "A");
+                DataTable accountinfo = accountobj.LoadAccountDetails(Diff[0], "A");
                 if (accountinfo.Rows.Count > 0)
                 {
                     FormView1.DataSource = accountinfo;
@@ -201,7 +200,7 @@ public partial class Inventory_AccountRelated : System.Web.UI.Page
                 clearnloadformview(sender, e);
             }
             lblMsg.Text = help.Left(msg, msg.Length - 1);
-            //lblMsg.Text = "update logic goes here";   
+           
         }
 
         if (e.CommandName == "cancel")
@@ -212,7 +211,7 @@ public partial class Inventory_AccountRelated : System.Web.UI.Page
         if (e.CommandName == "AcGrp")
         {
             FormView1.ChangeMode(FormViewMode.Insert);
-            DataTable accountinfo = infobj.LoadAccountDetails(Diff[0], "A");
+            DataTable accountinfo = accountobj.LoadAccountDetails(Diff[0], "A");
             if (accountinfo.Rows.Count > 0)
             {
                 FormView1.DataSource = accountinfo;
@@ -224,7 +223,7 @@ public partial class Inventory_AccountRelated : System.Web.UI.Page
         if (e.CommandName == "AcHead")
         {
             FormView1.ChangeMode(FormViewMode.Insert);
-            DataTable accountinfo = infobj.LoadAccountDetails(Diff[0], "A");
+            DataTable accountinfo = accountobj.LoadAccountDetails(Diff[0], "A");
             if (accountinfo.Rows.Count > 0)
             {
                 FormView1.DataSource = accountinfo;
