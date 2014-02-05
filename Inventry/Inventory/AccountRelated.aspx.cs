@@ -282,7 +282,9 @@ public partial class Inventory_AccountRelated : System.Web.UI.Page
                 owner = Session["dealer"].ToString();
             }
             atype = lblType.Text;
-            string acode = ((TextBox)FormView1.FindControl("txtNewAccountCode")).Text;
+            DataTable accode = accountobj.generateMaxNumber("AC", "HO");
+            string acode = accode.Rows[0][0].ToString();
+            //string acode = ((TextBox)FormView1.FindControl("txtNewAccountCode")).Text;
             string aname = ((TextBox)FormView1.FindControl("txtNewAccountDescription")).Text;
             string ucode = Session["usercode"].ToString();
             string msg = accountobj.AllAccountRelated(parent, acode, aname, atype, alevels, owner, ucode, "I", lblDetail.Text, TAdd, PAdd, CPerson, Tel, Mob, Email, Web, Rem);
