@@ -14,12 +14,31 @@ public partial class Inventory_AccountRelated : System.Web.UI.Page
    
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (!IsPostBack)
+        if (Session["username"] != null)
         {
-            TreeView1.Nodes.Clear();
-            AddTopTreeViewNodes();
-            //lblDetail.Text = "N";
+            if (!IsPostBack)
+            {
+                lblUsername.Text = UppercaseFirst(Session["username"].ToString());
+                TreeView1.Nodes.Clear();
+                AddTopTreeViewNodes();
+                //lblDetail.Text = "N";
+            }
         }
+        else
+        {
+            Response.Redirect("../Error.aspx");
+        }
+    }
+
+    static string UppercaseFirst(string username)
+    {
+        if (string.IsNullOrEmpty(username))
+        {
+            return string.Empty;
+        }
+        char[] a = username.ToCharArray();
+        a[0] = char.ToUpper(a[0]);
+        return new string(a);
     }
 
     private void AddTopTreeViewNodes()
@@ -129,6 +148,7 @@ public partial class Inventory_AccountRelated : System.Web.UI.Page
         int alevels;
         string chkValue = TreeView1.SelectedNode.Value;
         string[] Diff = TreeView1.SelectedNode.Value.Split('-');
+        string[] DiffUpDt = TreeView1.SelectedNode.Parent.Value.Split('-');
 
         if (e.CommandName == "Edit")
         {
@@ -151,7 +171,7 @@ public partial class Inventory_AccountRelated : System.Web.UI.Page
         if (e.CommandName == "edit")
         {
             alevels = Convert.ToInt32(Diff[2]);
-            string[] DiffUpDt = TreeView1.SelectedNode.Parent.Value.Split('-');
+            //string[] DiffUpDt = TreeView1.SelectedNode.Parent.Value.Split('-');
             parent = DiffUpDt[0];
             atype = atype = Diff[1];
             if (lblDetail.Text == "Y")
@@ -210,25 +230,59 @@ public partial class Inventory_AccountRelated : System.Web.UI.Page
 
         if (e.CommandName == "AcGrp")
         {
-            FormView1.ChangeMode(FormViewMode.Insert);
-            DataTable accountinfo = accountobj.LoadAccountDetails(Diff[0], "A");
-            if (accountinfo.Rows.Count > 0)
+            if (Diff[1] == "A") 
             {
-                FormView1.DataSource = accountinfo;
-                FormView1.DataBind();
-                lblMsg.Text = " ";
+                if (DiffUpDt[0]=="SB1")
+                {
+                    lblMsg.Text = "SubDealer Should be Created by (Master-SubDealerCreate) Menu";
+                }
+            }
+            else if (Diff[1] == "G")
+            {
+                if (Diff[0] == "SB1")
+                {
+                    lblMsg.Text = "SubDealer Should be Created by (Master-SubDealerCreate) Menu";
+                }
+            }
+            else
+            {
+                FormView1.ChangeMode(FormViewMode.Insert);
+                DataTable accountinfo = accountobj.LoadAccountDetails(Diff[0], "A");
+                if (accountinfo.Rows.Count > 0)
+                {
+                    FormView1.DataSource = accountinfo;
+                    FormView1.DataBind();
+                    lblMsg.Text = " ";
+                }
             }
         }
 
         if (e.CommandName == "AcHead")
         {
-            FormView1.ChangeMode(FormViewMode.Insert);
-            DataTable accountinfo = accountobj.LoadAccountDetails(Diff[0], "A");
-            if (accountinfo.Rows.Count > 0)
+            if (Diff[1] == "A") 
             {
-                FormView1.DataSource = accountinfo;
-                FormView1.DataBind();
-                lblMsg.Text = " ";
+                if (DiffUpDt[0]=="SB1")
+                {
+                    lblMsg.Text = "SubDealer Should be Created by (Master-SubDealerCreate) Menu";
+                }
+            }
+            else if (Diff[1] == "G")
+            {
+                if (Diff[0] == "SB1")
+                {
+                    lblMsg.Text = "SubDealer Should be Created by (Master-SubDealerCreate) Menu";
+                }
+            }
+            else
+            {
+                FormView1.ChangeMode(FormViewMode.Insert);
+                DataTable accountinfo = accountobj.LoadAccountDetails(Diff[0], "A");
+                if (accountinfo.Rows.Count > 0)
+                {
+                    FormView1.DataSource = accountinfo;
+                    FormView1.DataBind();
+                    lblMsg.Text = " ";
+                }
             }
         }
 
@@ -236,15 +290,15 @@ public partial class Inventory_AccountRelated : System.Web.UI.Page
         {
             if (Diff[1] == "A")
             {
-                string[] DiffUpDt = TreeView1.SelectedNode.Parent.Value.Split('-');
+                //string[] DiffUpDt = TreeView1.SelectedNode.Parent.Value.Split('-');
                 alevels = Convert.ToInt32(DiffUpDt[2]) + 1;
                 parent = DiffUpDt[0];
             }
             else
             {
-                string[] DiffUpDt = TreeView1.SelectedNode.Value.Split('-');
-                alevels = Convert.ToInt32(DiffUpDt[2]) + 1;
-                parent = DiffUpDt[0];
+                //string[] DiffUpDt = TreeView1.SelectedNode.Value.Split('-');
+                alevels = Convert.ToInt32(Diff[2]) + 1;
+                parent = Diff[0];
             }
             if (lblDetail.Text == "Y")
             {

@@ -13,12 +13,31 @@ public partial class Inventory_SubDealerCreate : System.Web.UI.Page
     Helper help = new Helper();
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (!IsPostBack)
+        if (Session["username"] != null)
         {
-            TreeView1.Nodes.Clear();
-            AddTopTreeViewNodes();
-            //lblDetail.Text = "N";
+            if (!IsPostBack)
+            {
+                lblUsername.Text = UppercaseFirst(Session["username"].ToString());
+                TreeView1.Nodes.Clear();
+                AddTopTreeViewNodes();
+                //lblDetail.Text = "N";
+            }
         }
+        else
+        {
+            Response.Redirect("../Error.aspx");
+        }
+    }
+
+    static string UppercaseFirst(string username)
+    {
+        if (string.IsNullOrEmpty(username))
+        {
+            return string.Empty;
+        }
+        char[] a = username.ToCharArray();
+        a[0] = char.ToUpper(a[0]);
+        return new string(a);
     }
 
     private void AddTopTreeViewNodes()
@@ -109,20 +128,13 @@ public partial class Inventory_SubDealerCreate : System.Web.UI.Page
 
         if (e.CommandName == "Edit")
         {
-            if (Diff[3] == "Y")
-            {
-                FormView1.ChangeMode(FormViewMode.Edit);
+              FormView1.ChangeMode(FormViewMode.Edit);
                 DataTable accountinfo = subdealerobj.LoadSubDealearDetails(Diff[0], "A");
                 if (accountinfo.Rows.Count > 0)
                 {
                     FormView1.DataSource = accountinfo;
                     FormView1.DataBind();
                 }
-            }
-            else
-            {
-                lblMsg.Text = "Master SubDealear can't Edit.";
-            }
         }
 
         if (e.CommandName == "edit")

@@ -3,7 +3,11 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <div class="container-fluid">
         <div class="well">
-             <asp:Label ID="Label1" runat="server" Text="WelCome"></asp:Label>
+              Welcome :
+				
+				<%--<p class="pull-right">Signed in as <a href="#">User</a></p>--%>
+			    <asp:Label ID="lblUsername" runat="server" Text=""></asp:Label>
+                <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
         </div>
     </div>
 
@@ -223,7 +227,7 @@
                                       <tr>
                                     <td>
                                         <asp:CheckBox ID="chkIsShowIf" runat="server" 
-                                            OnCheckedChanged="chkIsShowIf_CheckedChanged" Text="Show If" 
+                                            OnCheckedChanged="chkIsShowIf_CheckedChanged" Text="Show Sub Dealer in Dealer List" 
                                             AutoPostBack="True" />
                                     </td><td></td>
                                  </tr>
@@ -349,7 +353,7 @@
                                      <tr>
                                     <td>
                                         <asp:CheckBox ID="chkIsShowIf" runat="server" 
-                                            OnCheckedChanged="chkIsShowIf_CheckedChanged" Text="Show If" 
+                                            OnCheckedChanged="chkIsShowIf_CheckedChanged" Text="Show Sub Dealer in Dealer List" 
                                             AutoPostBack="True" />
                                     </td><td></td>
                                  </tr>
