@@ -51,6 +51,8 @@ public partial class Inventory_AccountRelated : System.Web.UI.Page
             pname = AcName.Rows[0][4].ToString();
         }
         TreeNode newNodes = new TreeNode(pname, pcode + "-G-3-N-N");
+
+        //TreeNode newNodes = new TreeNode("Products", "G1-G-3");
         TreeView1.Nodes.Add(newNodes);
         TreeView1.Nodes[0].Selected = true;
         TreeView1.SelectedNode.ChildNodes.Clear();
@@ -108,18 +110,18 @@ public partial class Inventory_AccountRelated : System.Web.UI.Page
         {
             FormView1.DataSource = accountinfo;
             FormView1.DataBind();
-            if (accountinfo.Rows[0][7].ToString() == "Comm")
-            {
-                ((RadioButton)FormView1.FindControl("rbdCommon")).Checked = true;
-            }
-            else if (accountinfo.Rows[0][7].ToString() == "Sub")
-            {
-                ((RadioButton)FormView1.FindControl("rbdSubDealer")).Checked = true;
-            }
-            else
-            {
-                ((RadioButton)FormView1.FindControl("rbdIndividual")).Checked = true;
-            }
+            //if (accountinfo.Rows[0][7].ToString() == "Comm")
+            //{
+            //    ((RadioButton)FormView1.FindControl("rbdCommon")).Checked = true;
+            //}
+            //else if (accountinfo.Rows[0][7].ToString() == "Sub")
+            //{
+            //    ((RadioButton)FormView1.FindControl("rbdSubDealer")).Checked = true;
+            //}
+            //else
+            //{
+            //    ((RadioButton)FormView1.FindControl("rbdIndividual")).Checked = true;
+            //}
             if (Diff[4] == "Y")
             {
                 lblDetail.Text = "Y";
@@ -171,9 +173,9 @@ public partial class Inventory_AccountRelated : System.Web.UI.Page
         if (e.CommandName == "edit")
         {
             alevels = Convert.ToInt32(Diff[2]);
-            //string[] DiffUpDt = TreeView1.SelectedNode.Parent.Value.Split('-');
+           // string[] DiffUpDt = TreeView1.SelectedNode.Parent.Value.Split('-');
             parent = DiffUpDt[0];
-            atype = atype = Diff[1];
+            atype = Diff[1];
             if (lblDetail.Text == "Y")
             {
                 TAdd = ((TextBox)FormView1.FindControl("txtEditTempAddress")).Text;
@@ -230,19 +232,23 @@ public partial class Inventory_AccountRelated : System.Web.UI.Page
 
         if (e.CommandName == "AcGrp")
         {
-            if (Diff[1] == "A") 
+          //  string[] DiffUpDt = TreeView1.SelectedNode.Parent.Value.Split('-');
+            if (Diff[1] == "A" && DiffUpDt[0] == "SB1") 
             {
-                if (DiffUpDt[0]=="SB1")
-                {
+                
+                //if (DiffUpDt[0]=="SB1")
+                //{
                     lblMsg.Text = "SubDealer Should be Created by (Master-SubDealerCreate) Menu";
-                }
+                //}
+              
             }
-            else if (Diff[1] == "G")
+            else if (Diff[1] == "G" && Diff[0] == "SB1")
             {
-                if (Diff[0] == "SB1")
-                {
+                //if (Diff[0]=="SB1")
+                //{
                     lblMsg.Text = "SubDealer Should be Created by (Master-SubDealerCreate) Menu";
-                }
+                //}
+              
             }
             else
             {
@@ -259,19 +265,24 @@ public partial class Inventory_AccountRelated : System.Web.UI.Page
 
         if (e.CommandName == "AcHead")
         {
-            if (Diff[1] == "A") 
+           // string[] DiffUpDt = TreeView1.SelectedNode.Parent.Value.Split('-');
+            if (Diff[1] == "A" && DiffUpDt[0] == "SB1") 
             {
-                if (DiffUpDt[0]=="SB1")
-                {
+                
+                //if (DiffUpDt[0]=="SB1")
+                //{
                     lblMsg.Text = "SubDealer Should be Created by (Master-SubDealerCreate) Menu";
-                }
+                //}
+               
             }
-            else if (Diff[1] == "G")
+            else if (Diff[1] == "G" && Diff[0] == "SB1")
             {
-                if (Diff[0] == "SB1")
-                {
+                //if (Diff[0]=="SB1")
+                //{
                     lblMsg.Text = "SubDealer Should be Created by (Master-SubDealerCreate) Menu";
-                }
+                //}
+               
+             
             }
             else
             {
@@ -296,7 +307,7 @@ public partial class Inventory_AccountRelated : System.Web.UI.Page
             }
             else
             {
-                //string[] DiffUpDt = TreeView1.SelectedNode.Value.Split('-');
+              //  string[] DiffUpDt = TreeView1.SelectedNode.Value.Split('-');
                 alevels = Convert.ToInt32(Diff[2]) + 1;
                 parent = Diff[0];
             }
@@ -408,5 +419,13 @@ public partial class Inventory_AccountRelated : System.Web.UI.Page
     protected void FormView1_ItemDeleting(object sender, FormViewDeleteEventArgs e)
     {
         //
+    }
+    protected void Owner_CheckedChanged(object sender, EventArgs e)
+    {
+        //FormView1.ChangeMode(FormViewMode.Insert);
+        //if ((RadioButton)FormView1.FindControl("rbdCommon").Checked)
+        //{
+            
+        //}
     }
 }

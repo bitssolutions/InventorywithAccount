@@ -10,7 +10,7 @@ using System.Data;
 /// </summary>
 public class SubDealerRelated
 {
-    //account related stard
+    //subdealer related start
     public string AllSubDealerRelated(string code, string aname,string usercode, string status, string addt, string addp, string conperson, string telephone, string mobile, string email, string webpage, string remarks,string showif)
     {
         SqlParameter[] param = new SqlParameter[14];
@@ -41,7 +41,7 @@ public class SubDealerRelated
         param[1] = new SqlParameter("@Owner", owner);
         return DataAccessLayer.getTable("GenerateMaxNumber", param);
     }
-    //account related end
+    //subdealer related end
 
     // to load treeview structure
     public DataTable LoadSubDealerListTreeView(string parent, string owner)
@@ -53,7 +53,7 @@ public class SubDealerRelated
     }
     //end load treeview structure
 
-    //load accountinfo
+    //load subdealearinfo
     public DataTable LoadSubDealearDetails(string ucode, string type)
     {
         SqlParameter[] param = new SqlParameter[2];
@@ -63,5 +63,5 @@ public class SubDealerRelated
     }
 
 
-    //end load accountinfo
+    //end load subdealearinfo
 }

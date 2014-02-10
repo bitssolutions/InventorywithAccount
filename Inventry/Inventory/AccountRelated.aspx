@@ -5,7 +5,7 @@
         <div class="well">
              Welcome :
 				
-				<%--<p class="pull-right">Signed in as <a href="#">User</a></p>--%>
+				
 			    <asp:Label ID="lblUsername" runat="server" Text=""></asp:Label>
                 <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
         </div>
@@ -128,18 +128,49 @@
                                         </td>
                                     </tr>
                         <% } %>
+
+                              <%
+                                    string[] Diff = TreeView1.SelectedNode.Value.Split('-');
+                                    AccountRelated accountobj = new AccountRelated();
+                                    System.Data.DataTable accode = accountobj.LoadAccountDetails(Diff[0],Diff[1]);
+                                    if (accode.Rows.Count > 0)
+                                    {
+                                        if (accode.Rows[0][7].ToString()=="Comm")
+                                        {
+                                            ((RadioButton)FormView1.FindControl("rbdCommon")).Checked = true;
+                                        }
+                                        else if (accode.Rows[0][7].ToString()=="Sub")
+                                        {
+                                            ((RadioButton)FormView1.FindControl("rbdSubDealer")).Checked = true;
+                                        }
+                                        else
+                                        {
+                                            ((RadioButton)FormView1.FindControl("rbdIndividual")).Checked = true;
+                                        }
+                                    }
+                                    
+                                  %>
                                     <tr>
                                         <td colspan="2">
                                             <br />
                                             <asp:RadioButton ID="rbdIndividual" runat="server" Text="Individual" 
                                                 GroupName="Owner" onclick="return false;"/>
                                              <asp:RadioButton ID="rbdSubDealer" runat="server"  Text="Sub Dealer" 
-                                                onclick="return false;"/>
+                                                onclick="return false;" GroupName="Owner"/>
                                               <asp:RadioButton ID="rbdCommon" runat="server" Text="Common" 
                                                 GroupName="Owner" onclick="return false;"/>
                                         </td>
                                     </tr>
-                                 
+                                 <%--<tr>
+                                        <td colspan="2">
+                                            <asp:RadioButtonList ID="RadioButtonList1" runat="server" 
+                                                RepeatDirection="Horizontal" SelectedValue='<%#Bind("Owner") %>'>
+                                                <asp:ListItem Value="HO">Individual</asp:ListItem>
+                                                <asp:ListItem Value="Sub">Sub Dealer</asp:ListItem>
+                                                <asp:ListItem Value="Comm">Common</asp:ListItem>
+                                            </asp:RadioButtonList>
+                                        </td>
+                                    </tr>--%>
                                 </table>
                             </ItemTemplate>
 
@@ -239,17 +270,8 @@
                                             <asp:TextBox ID="txtEditRemarks" Text='<%#Bind("Remarks") %>' runat="server" Width="200px"></asp:TextBox>
                                         </td>
                                     </tr>
-
-                                     <tr>
-                                        <td colspan="2">
-                                            <asp:RadioButtonList ID="rbdEditOwner" runat="server" 
-                                                RepeatDirection="Horizontal" SelectedValue='<%#Bind("Owner") %>'>
-                                                <asp:ListItem Value="HO">Individual</asp:ListItem>
-                                                <asp:ListItem Value="Sub">Sub Dealer</asp:ListItem>
-                                                <asp:ListItem Value="Comm">Common</asp:ListItem>
-                                            </asp:RadioButtonList>
-                                        </td>
-                                    </tr>
+                                   
+                                    
                          <% } %>
 
                           <% if (lblDetail.Text == "N")
@@ -310,30 +332,47 @@
                                             <asp:TextBox ID="txtEditReadRem" Text='<%#Bind("Remarks") %>' runat="server" Width="200px" ReadOnly="true"></asp:TextBox>
                                         </td>
                                     </tr>
+                                   
+                                     
+                         <% } %>
 
+                         <%} %>
+
+                         <%if (lblDetail.Text == "Y" || lblDetail.Text == "N")
+                           { %>
+                             <%
+                                    string[] Diff = TreeView1.SelectedNode.Value.Split('-');
+                                    AccountRelated accountobj = new AccountRelated();
+                                    System.Data.DataTable accode = accountobj.LoadAccountDetails(Diff[0],Diff[1]);
+                                    if (accode.Rows.Count > 0)
+                                    {
+                                        if (accode.Rows[0][7].ToString()=="Comm")
+                                        {
+                                            ((RadioButton)FormView1.FindControl("rbdEditCommon")).Checked=true;
+                                        }
+                                        else if (accode.Rows[0][7].ToString()=="Sub")
+                                        {
+                                             ((RadioButton)FormView1.FindControl("rbdEditSubDealer")).Checked=true;
+                                        }
+                                        else
+                                        {
+                                            ((RadioButton)FormView1.FindControl("rbdEditIndividual")).Checked = true;
+                                        }
+                                    }
+                                    
+                                  %>
                                     <tr>
                                         <td colspan="2">
                                             <br />
-                                            <asp:RadioButton ID="rbdIndividual" runat="server" Text="Individual" 
-                                                GroupName="Owner"  />
-                                             <asp:RadioButton ID="rbdSubDealer" runat="server"  Text="Sub Dealer" 
+                                            <asp:RadioButton ID="rbdEditIndividual" runat="server" Text="Individual" 
+                                                GroupName="OwnerEdit"  />
+                                             <asp:RadioButton ID="rbdEditSubDealer" runat="server"  Text="Sub Dealer" GroupName="OwnerEdit" 
                                                />
-                                              <asp:RadioButton ID="rbdCommon" runat="server" Text="Common" 
-                                                GroupName="Owner" />
+                                              <asp:RadioButton ID="rbdEditCommon" runat="server" Text="Common" 
+                                                GroupName="OwnerEdit" />
                                         </td>
                                     </tr>
 
-                                     <%--<tr>
-                                        <td colspan="2">
-                                            <asp:RadioButtonList ID="RadioButtonList1" runat="server" 
-                                                RepeatDirection="Horizontal" SelectedValue='<%#Bind("Owner") %>'>
-                                                <asp:ListItem Value="HO">Individual</asp:ListItem>
-                                                <asp:ListItem Value="Sub">Sub Dealer</asp:ListItem>
-                                                <asp:ListItem Value="Comm">Common</asp:ListItem>
-                                            </asp:RadioButtonList>
-                                        </td>
-                                    </tr>--%>
-                         <% } %>
 
                          <%} %>
                                 </table>
@@ -528,25 +567,16 @@
 
                                      <% } %>
 
-                                    <%-- <tr>
-                                        <td colspan="2">
-                                            <asp:RadioButtonList ID="rbdnewOwner" runat="server" 
-                                                RepeatDirection="Horizontal">
-                                                <asp:ListItem>Individual</asp:ListItem>
-                                                <asp:ListItem Value="Sub">Sub Dealer</asp:ListItem>
-                                                <asp:ListItem Value="Comm">Common</asp:ListItem>
-                                            </asp:RadioButtonList>
-                                        </td>
-                                    </tr>--%>
+                                 
                                       <tr>
                                         <td colspan="2">
                                             <br />
-                                            <asp:RadioButton ID="rbdIndividual" runat="server" Text="Individual" 
-                                                GroupName="Owner"/>
-                                             <asp:RadioButton ID="rbdSubDealer" runat="server"  Text="Sub Dealer" 
-                                               />
-                                              <asp:RadioButton ID="rbdCommon" runat="server" Text="Common" 
-                                                GroupName="Owner"/>
+                                            <asp:RadioButton ID="rbdNewIndividual" runat="server" Text="Individual" 
+                                                GroupName="OwnerNew" OnCheckedChanged="Owner_CheckedChanged"/>
+                                             <asp:RadioButton ID="rbdNewSubDealer" runat="server"  Text="Sub Dealer" 
+                                              OnCheckedChanged="Owner_CheckedChanged" GroupName="OwnerNew" />
+                                              <asp:RadioButton ID="rbdNewCommon" runat="server" Text="Common" 
+                                                GroupName="OwnerNew" OnCheckedChanged="Owner_CheckedChanged"/>
                                         </td>
                                     </tr>
 

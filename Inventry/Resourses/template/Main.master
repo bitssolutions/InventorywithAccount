@@ -50,7 +50,7 @@
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" style="font-weight: bolder; font-size: 16px;"><i class="glyphicon glyphicon-user" style="color:white;"></i> Master <b class="caret"></b></a>
 							<ul class="dropdown-menu">
-								<li><a href="#" style="font-weight: bolder; font-size: 16px;">Product Define</a></li>
+								<li><a href="../Inventory/ItemRelated.aspx?Products=G1" style="font-weight: bolder; font-size: 16px;">Product Define</a></li>
 								<li><a href="#" style="font-weight: bolder; font-size: 16px;">Account Define</a>
                                     <ul class="sub1">
                                         <li><a href="../Inventory/AccountRelated.aspx?Account=AT1" style="font-weight: bolder; font-size: 16px;">Assets</a></li>
