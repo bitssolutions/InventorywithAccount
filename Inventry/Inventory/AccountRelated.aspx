@@ -131,7 +131,7 @@
 
                               <%
                                     string[] Diff = TreeView1.SelectedNode.Value.Split('-');
-                                    AccountRelated accountobj = new AccountRelated();
+                                    MasterRelated accountobj = new MasterRelated();
                                     System.Data.DataTable accode = accountobj.LoadAccountDetails(Diff[0],Diff[1]);
                                     if (accode.Rows.Count > 0)
                                     {
@@ -342,7 +342,7 @@
                            { %>
                              <%
                                     string[] Diff = TreeView1.SelectedNode.Value.Split('-');
-                                    AccountRelated accountobj = new AccountRelated();
+                                    MasterRelated accountobj = new MasterRelated();
                                     System.Data.DataTable accode = accountobj.LoadAccountDetails(Diff[0],Diff[1]);
                                     if (accode.Rows.Count > 0)
                                     {
@@ -381,7 +381,7 @@
                             <InsertItemTemplate>
                             
                             <%
-                                AccountRelated accountobj = new AccountRelated();
+                                MasterRelated accountobj = new MasterRelated();
                                 
                                 string[] Diff = TreeView1.SelectedNode.Value.Split('-');
                                if (Diff[1] == "A")

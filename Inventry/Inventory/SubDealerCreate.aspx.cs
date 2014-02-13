@@ -8,8 +8,8 @@ using System.Data;
 
 public partial class Inventory_SubDealerCreate : System.Web.UI.Page
 {
-    //AccountRelated accountobj = new AccountRelated();
-    SubDealerRelated subdealerobj = new SubDealerRelated();
+    
+    MasterRelated subdealerobj = new MasterRelated();
     Helper help = new Helper();
     protected void Page_Load(object sender, EventArgs e)
     {

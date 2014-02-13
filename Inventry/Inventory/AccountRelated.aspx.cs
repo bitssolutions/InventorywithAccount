@@ -8,8 +8,8 @@ using System.Data;
 
 public partial class Inventory_AccountRelated : System.Web.UI.Page
 {
-  
-    AccountRelated accountobj = new AccountRelated();
+
+    MasterRelated accountobj = new MasterRelated();
     Helper help = new Helper();
    
     protected void Page_Load(object sender, EventArgs e)
@@ -88,6 +88,7 @@ public partial class Inventory_AccountRelated : System.Web.UI.Page
             lblIsDetail.Text = Diff[4];
             if (Diff[1] == "G")
             {
+                //string aname = ((TextBox)FormView1.FindControl("txtEditAccountDescription")).Text;
                 TreeView1.SelectedNode.ChildNodes.Clear();
                 AddChildTreeViewNodes(Diff[0]);
                 loadFormView();
@@ -95,6 +96,7 @@ public partial class Inventory_AccountRelated : System.Web.UI.Page
             }
             else
             {
+                //string aname = ((TextBox)FormView1.FindControl("txtEditAccountDescription")).Text;
                 loadFormView();
                 lblMsg.Text = "";
             }

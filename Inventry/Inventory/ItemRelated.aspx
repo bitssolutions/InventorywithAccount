@@ -5,7 +5,13 @@
         <div class="well">
               Welcome :
 				
-				<%--<p class="pull-right">Signed in as <a href="#">User</a></p>--%>
+				<%-- <tr>
+                                        <td>
+                                            Product Name</td>
+                                        <td>
+                                            <asp:Label ID="lblProductName" Text='<%# Eval("AddT") %>' runat="server"></asp:Label>
+                                        </td>
+                                    </tr>--%>
 			    <asp:Label ID="lblUsername" runat="server" Text=""></asp:Label>
                 <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
         </div>
@@ -21,26 +27,33 @@
                     </div>
                </div>
             </div>
-           <%--formview load goes here--%>
+            <%-- <tr>
+                                        <td>
+                                            Product Name</td>
+                                        <td>
+                                            <asp:Label ID="lblProductName" Text='<%# Eval("AddT") %>' runat="server"></asp:Label>
+                                        </td>
+                                    </tr>--%>
            <div class="col-lg-10">
                 <div class="well">
                     <div class="row">
-                      <asp:Label ID="lblShowIf" runat="server" Visible="False"></asp:Label>
                       
-                       <asp:FormView ID="FormView1" runat="server" Width="488px" DefaultMode="ReadOnly" >
-                          <%--  onmodechanging="FormView1_ModeChanging"
+                      <asp:Label ID="lblType" runat="server" Visible="False"></asp:Label>
+                      <asp:Label ID="lblDetail" runat="server" Text="" Visible="false"></asp:Label>
+                       <asp:FormView ID="FormView1" runat="server" Width="488px" DefaultMode="ReadOnly"
+                            onmodechanging="FormView1_ModeChanging"
                             onitemcommand="FormView1_ItemCommand"  
                             onitemupdating="FormView1_ItemUpdating" 
-                            onitemdeleting="FormView1_ItemDeleting">--%>
+                            onitemdeleting="FormView1_ItemDeleting">
                             
                             <ItemTemplate>
                                 <table width="450px">
                                 <tr>
                                     <th colspan="2">
-                                        <asp:Button ID="btnItemGrp" runat="server" Text="Create Item Group" 
-                                            CommandName="CreateItemGroup" />  
+                                        <asp:Button ID="btnItemGroup" runat="server" Text="Create Item Group" 
+                                            CommandName="CreateItemGroup" onclick="btnItemGroup_Click" />  
                                         <asp:Button ID="btnItemList" runat="server" Text="Create Item List" 
-                                            CommandName="CreateItemGroup" />  
+                                            CommandName="CreateItemList" onclick="btnItemList_Click" />  
                                         <asp:Button ID="btnEdit" runat="server" Text="Edit" CommandName="Edit" 
                                             TabIndex="3" Width="88px" /> 
                                         <asp:Button ID="btnDelete" runat="server" Text="Delete" CommandName="Delete" 
@@ -63,7 +76,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            Product Group</td>
+                                            Product Group/Name</td>
                                         <td>
                                             <asp:Label ID="lblProductGroup" Text='<%#Eval("IName") %>' runat="server"></asp:Label>
                                         </td>
@@ -71,73 +84,101 @@
                           
                                    <%-- <tr>
                                         <td>
-                                            Address Temporary</td>
+                                            Product Name</td>
                                         <td>
-                                            <asp:Label ID="lblTempAddress" Text='<%#Eval("AddT") %>' runat="server"></asp:Label>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Address Permanent</td>
-                                        <td>
-                                            <asp:Label ID="lblPermanentAddress" Text='<%#Eval("AddP") %>' runat="server"></asp:Label>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Contact Person</td>
-                                        <td>
-                                            <asp:Label ID="lblContactPerson" Text='<%#Eval("ConPerson") %>' runat="server"></asp:Label>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Telephone</td>
-                                        <td>
-                                            <asp:Label ID="lblTelephone" Text='<%#Eval("Telephone") %>' runat="server"></asp:Label>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Mobile</td>
-                                        <td>
-                                            <asp:Label ID="lblMobile" Text='<%#Eval("Mobile") %>' runat="server"></asp:Label>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Email</td>
-                                        <td>
-                                            <asp:Label ID="lblEmail" Text='<%#Eval("EMail") %>' runat="server"></asp:Label>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Web Page</td>
-                                        <td>
-                                            <asp:Label ID="lblWebpage" Text='<%#Eval("WebPage") %>' runat="server"></asp:Label>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Remarks</td>
-                                        <td>
-                                            <asp:Label ID="lblRemarks" Text='<%#Eval("Remarks") %>' runat="server"></asp:Label>
+                                            <asp:Label ID="lblProductName" Text='<%# Eval("AddT") %>' runat="server"></asp:Label>
                                         </td>
                                     </tr>--%>
-                        
-                               <%-- <tr>
-                                    <td>
-                                        <asp:CheckBox ID="chkIsShowIf" runat="server" 
-                                            OnCheckedChanged="chkIsShowIf_CheckedChanged" Text="Show If" 
-                                            AutoPostBack="True" Checked='<%Eval("ShowIf") %>' />
-                                    </td>
-                                 </tr>--%>
+                                    <tr>
+                                        <td>
+                                            Product Name Details</td>
+                                        <td>
+                                            <asp:Label ID="lblProductDeatils" Text='' runat="server"></asp:Label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Company Rate</td>
+                                        <td>
+                                            <asp:Label ID="lblCRate" Text='' runat="server"></asp:Label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Purchase Rate</td>
+                                        <td>
+                                            <asp:Label ID="lblPRate" Text='' runat="server"></asp:Label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Wholesale Rate</td>
+                                        <td>
+                                            <asp:Label ID="lblWRate" Text='' runat="server"></asp:Label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="height: 22px">
+                                            Selling Rate</td>
+                                        <td style="height: 22px">
+                                            <asp:Label ID="lblSRate" Text='' runat="server"></asp:Label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Provider (Supllier)</td>
+                                        <td>
+                                            <asp:Label ID="lblProvider" Text='' runat="server"></asp:Label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Base Unit</td>
+                                        <td>
+                                            <asp:Label ID="lblBaseUnit" Text='' runat="server"></asp:Label>
+                                        </td>
+                                    </tr>
+                           
+                                    <tr>
+                                        <td>
+                                            Minimum Level</td>
+                                        <td>
+                                            <asp:Label ID="lblMinStock" runat="server" Text=''></asp:Label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Maximum Level</td>
+                                        <td>
+                                            <asp:Label ID="lblMaxStock" runat="server" Text=''></asp:Label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Discount Type</td>
+                                        <td>
+                                            <asp:Label ID="lblDiscType" runat="server" Text=''></asp:Label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Amount/Percentage</td>
+                                        <td>
+                                            <asp:Label ID="lblAmount" runat="server" Text=''></asp:Label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            VAT/None VAT</td>
+                                        <td>
+                                            <asp:Label ID="lblVat" runat="server" Text=''></asp:Label>
+                                        </td>
+                                    </tr>
                                  
                                 </table>
                             </ItemTemplate>
 
-                           <%-- <EditItemTemplate>
+                            <EditItemTemplate>
                                  <table style="width: 450px">
                                    <tr>
                                     <th colspan="2">
@@ -145,103 +186,135 @@
                                         <asp:Button ID="btnCancel" runat="server" Text="Cancel" CommandName="cancel" /> 
                                     </th>
                                 </tr>
-                                   <tr>
+                                   
+                                    <tr>
                                         <td>
-                                            Account Group</td>
+                                            Parent</td>
                                         <td>
-                                            <asp:TextBox ID="txtEditAccountGrp" Text='<%#Bind("PName") %>' runat="server" Width="200px" ReadOnly="true"></asp:TextBox>
+                                            <asp:Label ID="lblEditProductParent" Text='<%# Eval("PName") %>' runat="server"></asp:Label>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            Account Code</td>
+                                            Product Code</td>
                                         <td>
-                                            <asp:TextBox ID="txtEditAccountCode" Text='<%#Bind("Code") %>' runat="server" Width="200px" ReadOnly="true"></asp:TextBox>
+                                            <asp:Label ID="lblEditICode" Text='<%# Eval("Code") %>' runat="server"></asp:Label>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            Account Description</td>
+                                            Product Group/Name</td>
                                         <td>
-                                            <asp:TextBox ID="txtEditAccountDescription" Text='<%#Bind("AName") %>' runat="server" Width="200px"></asp:TextBox>
+                                            <asp:TextBox ID="txtEditIName" runat="server" Width="200px"></asp:TextBox>
                                         </td>
                                     </tr>
                           
-                               
+                                    <tr>
+                                        <td>
+                                            Product Name Details</td>
+                                        <td>
+                                            <asp:TextBox ID="txtEditItName" runat="server" Width="200px"></asp:TextBox>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Company Rate</td>
+                                        <td>
+                                            <asp:TextBox ID="txtEditCRate" runat="server" Width="200px"></asp:TextBox>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Purchase Rate</td>
+                                        <td>
+                                            <asp:TextBox ID="txtEditPRate" runat="server" Width="200px"></asp:TextBox>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Wholesale Rate</td>
+                                        <td>
+                                            <asp:TextBox ID="txtEditWRate" runat="server" Width="200px"></asp:TextBox>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="height: 22px">
+                                            Selling Rate</td>
+                                        <td style="height: 22px">
+                                            <asp:TextBox ID="txtEditSRate" runat="server" Width="200px"></asp:TextBox>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Provider (Supllier)</td>
+                                        <td>
+                                            <asp:DropDownList ID="ddlListEditSupllier" runat="server">
+                                            </asp:DropDownList>
+                                            &nbsp;
+                                            <asp:TextBox ID="txtEditACode" runat="server" Width="100px"></asp:TextBox>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Base Unit</td>
+                                        <td>
+                                            <asp:DropDownList ID="ddlListEditBaseUnit" runat="server">
+                                            </asp:DropDownList>
+                                        </td>
+                                    </tr>
+                        
                                 
                                     <tr>
                                         <td>
-                                            Address Temporary</td>
+                                            Minimum Level</td>
                                         <td>
-                                            <asp:TextBox ID="txtEditTempAddress" Text='<%#Bind("AddT") %>' runat="server" Width="200px"></asp:TextBox>
+                                            <asp:TextBox ID="txtEditMinStock" runat="server" Width="200px"></asp:TextBox>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            Address Permanent</td>
+                                            Maximum Level</td>
                                         <td>
-                                            <asp:TextBox ID="txtEditPermanentAddress" Text='<%#Bind("AddP") %>' runat="server" Width="200px"></asp:TextBox>
+                                            <asp:TextBox ID="txtEditMaxStock" runat="server" Width="200px"></asp:TextBox>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            Contact Person</td>
+                                            Discount Type</td>
                                         <td>
-                                            <asp:TextBox ID="txtEditConPerson" Text='<%#Bind("ConPerson") %>' runat="server" Width="200px"></asp:TextBox>
+                                            <asp:RadioButtonList ID="rbdListEditDiscType" runat="server" 
+                                                RepeatDirection="Horizontal">
+                                                <asp:ListItem Value="F">Flat</asp:ListItem>
+                                                <asp:ListItem Value="P">Percentage</asp:ListItem>
+                                            </asp:RadioButtonList>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            Telephone</td>
+                                            Amount/Percentage</td>
                                         <td>
-                                            <asp:TextBox ID="txtEditTelephone" Text='<%#Bind("Telephone") %>' runat="server" Width="200px"></asp:TextBox>
+                                            <asp:TextBox ID="txtEditAmount" runat="server" Width="200px"></asp:TextBox>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            Mobile</td>
+                                            VAT/None VAT</td>
                                         <td>
-                                            <asp:TextBox ID="txtEditMobile" Text='<%#Bind("Mobile") %>' runat="server" Width="200px"></asp:TextBox>
+                                            <asp:RadioButtonList ID="rbdlistEditVat" runat="server" 
+                                                RepeatDirection="Horizontal">
+                                                <asp:ListItem Value="V">VAT</asp:ListItem>
+                                                <asp:ListItem Value="N">None VAT</asp:ListItem>
+                                            </asp:RadioButtonList>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>
-                                            Email</td>
-                                        <td>
-                                            <asp:TextBox ID="txtEditEmail" Text='<%#Bind("EMail") %>' runat="server" Width="200px"></asp:TextBox>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Web Page</td>
-                                        <td>
-                                            <asp:TextBox ID="txtEditWebPage" Text='<%#Bind("WebPage") %>' runat="server" Width="200px"></asp:TextBox>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Remarks</td>
-                                        <td>
-                                            <asp:TextBox ID="txtEditRemarks" Text='<%#Bind("Remarks") %>' runat="server" Width="200px"></asp:TextBox>
-                                        </td>
-                                    </tr>
-
-                                      <tr>
-                                    <td>
-                                        <asp:CheckBox ID="chkIsShowIf" runat="server" 
-                                            OnCheckedChanged="chkIsShowIf_CheckedChanged" Text="Show Sub Dealer in Dealer List" 
-                                            AutoPostBack="True" />
-                                    </td><td></td>
-                                 </tr>
-
 
                                 </table>
-                            </EditItemTemplate>--%>
+                            </EditItemTemplate>
 
-                           <%-- <InsertItemTemplate>
+                            <InsertItemTemplate>
                             
-                            <%
-                                SubDealerRelated subdealerobj = new SubDealerRelated();
+                          <%--  <%
+                                MasterRelated subdealerobj = new MasterRelated();
                                 
                                 string[] Diff = TreeView1.SelectedNode.Value.Split('-');
                                if (Diff[1] == "A")
@@ -263,7 +336,7 @@
                                     }
                                     
                                 %>
-                            
+                            --%>
                                  <table style="width: 450px">
                                    <tr>
                                     <th colspan="2">
@@ -272,96 +345,131 @@
                                     </th>
                                 </tr>
                                  
-                                   <tr>
+                                    <tr>
                                         <td>
-                                            Account Group</td>
+                                            Parent</td>
                                         <td>
-                                            <asp:TextBox ID="txtNewAccountGrp" Text='' runat="server" Width="200px" ReadOnly="true"></asp:TextBox>
+                                            <asp:Label ID="lblIsProductParent" Text='<%# Eval("PName") %>' runat="server"></asp:Label>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            Account Code</td>
+                                            Product Code</td>
                                         <td>
-                                            <asp:TextBox ID="txtNewAccountCode" Text='' runat="server" Width="200px" ReadOnly="true"></asp:TextBox>
+                                            <asp:Label ID="lblIsICode" Text='<%# Eval("Code") %>' runat="server"></asp:Label>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            Account Description</td>
+                                            Product Group/Name</td>
                                         <td>
-                                            <asp:TextBox ID="txtNewAccountDescription" Text='' runat="server" Width="200px"></asp:TextBox>
+                                            <asp:TextBox ID="txtIsIName" runat="server" Width="200px"></asp:TextBox>
                                         </td>
                                     </tr>
-                             
                           
-                                 <tr>
+                                    <tr>
                                         <td>
-                                            Address Temporary</td>
+                                            Product Name Details</td>
                                         <td>
-                                            <asp:TextBox ID="txtNewTempAddress" Text='' runat="server" Width="200px"></asp:TextBox>
+                                            <asp:TextBox ID="txtIsItName" runat="server" Width="200px"></asp:TextBox>
+                                        </td>
+                                    </tr>
+                        <% if (lblType.Text == "A")
+                          { %>
+                                    <tr>
+                                        <td>
+                                            Company Rate</td>
+                                        <td>
+                                            <asp:TextBox ID="txtIsCRate" runat="server" Width="200px"></asp:TextBox>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            Address Permanent</td>
+                                            Purchase Rate</td>
                                         <td>
-                                            <asp:TextBox ID="txtNewPermanentAddress" Text='' runat="server" Width="200px"></asp:TextBox>
+                                            <asp:TextBox ID="txtIsPRate" runat="server" Width="200px"></asp:TextBox>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            Contact Person</td>
+                                            Wholesale Rate</td>
                                         <td>
-                                            <asp:TextBox ID="txtNewConPerson" Text='' runat="server" Width="200px"></asp:TextBox>
+                                            <asp:TextBox ID="txtIsWRate" runat="server" Width="200px"></asp:TextBox>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="height: 22px">
+                                            Selling Rate</td>
+                                        <td style="height: 22px">
+                                            <asp:TextBox ID="txtIsSRate" runat="server" Width="200px"></asp:TextBox>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            Telephone</td>
+                                            Provider (Supllier)</td>
                                         <td>
-                                            <asp:TextBox ID="txtNewTelephone" Text='' runat="server" Width="200px"></asp:TextBox>
+                                            <asp:DropDownList ID="ddlListIsSupllier" runat="server">
+                                            </asp:DropDownList>
+                                            &nbsp;
+                                            <asp:TextBox ID="txtIsACode" runat="server" Width="100px"></asp:TextBox>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            Mobile</td>
+                                            Base Unit</td>
                                         <td>
-                                            <asp:TextBox ID="txtNewMobile" Text='' runat="server" Width="200px"></asp:TextBox>
+                                            <asp:DropDownList ID="ddlListIsBaseUnit" runat="server">
+                                            </asp:DropDownList>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>
-                                            Email</td>
-                                        <td>
-                                            <asp:TextBox ID="txtNewEmail" Text='' runat="server" Width="200px"></asp:TextBox>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Web Page</td>
-                                        <td>
-                                            <asp:TextBox ID="txtNewWebPage" Text='' runat="server" Width="200px"></asp:TextBox>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Remarks</td>
-                                        <td>
-                                            <asp:TextBox ID="txtNewRemarks" Text='' runat="server" Width="200px" ></asp:TextBox>
-                                        </td>
-                                    </tr>
-
-                                     <tr>
-                                    <td>
-                                        <asp:CheckBox ID="chkIsShowIf" runat="server" 
-                                            OnCheckedChanged="chkIsShowIf_CheckedChanged" Text="Show Sub Dealer in Dealer List" 
-                                            AutoPostBack="True" />
-                                    </td><td></td>
-                                 </tr>
                         
+                                
+                                    <tr>
+                                        <td>
+                                            Minimum Level</td>
+                                        <td>
+                                            <asp:TextBox ID="txtIsMinStock" runat="server" Width="200px"></asp:TextBox>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Maximum Level</td>
+                                        <td>
+                                            <asp:TextBox ID="txtIsMaxStock" runat="server" Width="200px"></asp:TextBox>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Discount Type</td>
+                                        <td>
+                                            <asp:RadioButtonList ID="rbdListIsDiscType" runat="server" 
+                                                RepeatDirection="Horizontal">
+                                                <asp:ListItem Value="F">Flat</asp:ListItem>
+                                                <asp:ListItem Value="P">Percentage</asp:ListItem>
+                                            </asp:RadioButtonList>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Amount/Percentage</td>
+                                        <td>
+                                            <asp:TextBox ID="txtIsAmount" runat="server" Width="200px"></asp:TextBox>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            VAT/None VAT</td>
+                                        <td>
+                                            <asp:RadioButtonList ID="rbdlistIsVat" runat="server" 
+                                                RepeatDirection="Horizontal">
+                                                <asp:ListItem Value="V">VAT</asp:ListItem>
+                                                <asp:ListItem Value="N">None VAT</asp:ListItem>
+                                            </asp:RadioButtonList>
+                                        </td>
+                                    </tr>
+                                    <%} %>
                                 </table>
-                            </InsertItemTemplate>--%>
+                            </InsertItemTemplate>
                            
                         </asp:FormView>
                          <asp:Label ID="lblMsg" runat="server" Text=""></asp:Label>

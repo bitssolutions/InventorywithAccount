@@ -239,7 +239,7 @@
                             <InsertItemTemplate>
                             
                             <%
-                                SubDealerRelated subdealerobj = new SubDealerRelated();
+                                MasterRelated subdealerobj = new MasterRelated();
                                 
                                 string[] Diff = TreeView1.SelectedNode.Value.Split('-');
                                if (Diff[1] == "A")
