@@ -25,7 +25,8 @@ public partial class Inventory_SubDealerCreate : System.Web.UI.Page
         }
         else
         {
-            Response.Redirect("../Error.aspx");
+            //Response.Redirect("../Error.aspx");
+            Response.Redirect(GetRouteUrl("Error",null));
         }
     }
 

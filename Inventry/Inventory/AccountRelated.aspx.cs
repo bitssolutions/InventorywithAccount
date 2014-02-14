@@ -26,7 +26,8 @@ public partial class Inventory_AccountRelated : System.Web.UI.Page
         }
         else
         {
-            Response.Redirect("../Error.aspx");
+            Response.Redirect(GetRouteUrl("Error",null));
+            //Response.Redirect("../Error.aspx");
         }
     }
 

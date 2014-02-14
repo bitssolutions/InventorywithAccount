@@ -24,7 +24,8 @@ public partial class Inventory_ItemRelated : System.Web.UI.Page
         }
         else
         {
-            Response.Redirect("../Error.aspx");
+            //Response.Redirect("../Error.aspx");
+            Response.Redirect(GetRouteUrl("Error",null));
         }
     }
 
@@ -76,7 +77,6 @@ public partial class Inventory_ItemRelated : System.Web.UI.Page
         {
             FormView1.DataSource = iteminfo;
             FormView1.DataBind();
-
         }
     }
 
@@ -113,6 +113,7 @@ public partial class Inventory_ItemRelated : System.Web.UI.Page
     protected void FormView1_ModeChanging(object sender, FormViewModeEventArgs e)
     {
         //this modechanging event should be fired before to perform add edit and deleted command.
+       
     }
 
     protected void FormView1_ItemCommand(object sender, FormViewCommandEventArgs e)
@@ -202,6 +203,7 @@ public partial class Inventory_ItemRelated : System.Web.UI.Page
                 FormView1.DataSource = accountinfo;
                 FormView1.DataBind();
                 lblMsg.Text = " ";
+                ((Label)FormView1.FindControl("lblProductGrp")).Visible = true;
             }
         }
 
@@ -215,6 +217,7 @@ public partial class Inventory_ItemRelated : System.Web.UI.Page
                 FormView1.DataSource = accountinfo;
                 FormView1.DataBind();
                 lblMsg.Text = " ";
+                ((Label)FormView1.FindControl("lblProductItm")).Visible = true;
             }
             
         }
@@ -308,6 +311,7 @@ public partial class Inventory_ItemRelated : System.Web.UI.Page
     protected void btnItemList_Click(object sender, EventArgs e)
     {
         lblType.Text = "A";
+        
     }
 
    
@@ -322,5 +326,4 @@ public partial class Inventory_ItemRelated : System.Web.UI.Page
         //
     }
 
-    
 }

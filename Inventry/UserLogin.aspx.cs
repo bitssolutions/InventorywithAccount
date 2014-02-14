@@ -42,7 +42,8 @@ public partial class UserLogin : System.Web.UI.Page
                 else
                 {
                     Session.Add("usercode", dt.Rows[0][0].ToString());
-                    Response.Redirect("~/Inventory/Login.aspx"); //Inventory ma chirne
+                    Response.Redirect(GetRouteUrl("Login", null));
+                   // Response.Redirect("~/Inventory/Login.aspx"); //Inventory ma chirne
                 }
             }
             else if (dt.Rows[0][3].ToString() == "U")
@@ -50,8 +51,8 @@ public partial class UserLogin : System.Web.UI.Page
                 Session.Add("username", txtUsername.Text);
                 Session.Add("password", txtPassword.Text);
                 Session.Add("usercode", dt.Rows[0][0].ToString());
-                Response.Redirect("~/Inventory/Login.aspx");
-
+               // Response.Redirect("~/Inventory/Login.aspx");
+                Response.Redirect(GetRouteUrl("Login", null));
             }
             else if (dt.Rows[0][3].ToString() == "R")
             {

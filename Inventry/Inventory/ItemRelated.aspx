@@ -50,9 +50,9 @@
                                 <table width="450px">
                                 <tr>
                                     <th colspan="2">
-                                        <asp:Button ID="btnItemGroup" runat="server" Text="Create Item Group" 
+                                        <asp:Button ID="btnItemGroup" runat="server" Text="Create Product Group" 
                                             CommandName="CreateItemGroup" onclick="btnItemGroup_Click" />  
-                                        <asp:Button ID="btnItemList" runat="server" Text="Create Item List" 
+                                        <asp:Button ID="btnItemList" runat="server" Text="Create Product" 
                                             CommandName="CreateItemList" onclick="btnItemList_Click" />  
                                         <asp:Button ID="btnEdit" runat="server" Text="Edit" CommandName="Edit" 
                                             TabIndex="3" Width="88px" /> 
@@ -74,8 +74,21 @@
                                             <asp:Label ID="lblProductCode" Text='<%#Eval("Code") %>' runat="server"></asp:Label>
                                         </td>
                                     </tr>
+                                   <%-- <% 
+                                        string[] Diff = TreeView1.SelectedNode.Value.Split('-');
+                                        if (Diff[1]=="G")
+                                        {
+                                            ((Label)TreeView1.FindControl("lblProductGrp")).Visible = true;
+                                        }
+                                        else
+                                        {
+                                            ((Label)TreeView1.FindControl("lblProductItm")).Visible=true;
+                                        }
+                                         %>--%>
                                     <tr>
                                         <td>
+                                            <asp:Label ID="lblProductGrp" Text="Product Group" runat="server" Visible="false"></asp:Label>
+                                            <asp:Label ID="lblProductItm" Text="Product Name" runat="server" Visible="false"></asp:Label>
                                             Product Group/Name</td>
                                         <td>
                                             <asp:Label ID="lblProductGroup" Text='<%#Eval("IName") %>' runat="server"></asp:Label>
@@ -93,49 +106,50 @@
                                         <td>
                                             Product Name Details</td>
                                         <td>
-                                            <asp:Label ID="lblProductDeatils" Text='' runat="server"></asp:Label>
+                                            <asp:Label ID="lblProductDeatils" Text='<%#Eval("ItName") %>' runat="server"></asp:Label>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
                                             Company Rate</td>
                                         <td>
-                                            <asp:Label ID="lblCRate" Text='' runat="server"></asp:Label>
+                                            <asp:Label ID="lblCRate" Text='<%#Eval("CRate") %>' runat="server"></asp:Label>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
                                             Purchase Rate</td>
                                         <td>
-                                            <asp:Label ID="lblPRate" Text='' runat="server"></asp:Label>
+                                            <asp:Label ID="lblPRate" Text='<%#Eval("PRate") %>' runat="server"></asp:Label>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
                                             Wholesale Rate</td>
                                         <td>
-                                            <asp:Label ID="lblWRate" Text='' runat="server"></asp:Label>
+                                            <asp:Label ID="lblWRate" Text='<%#Eval("WRate") %>' runat="server"></asp:Label>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="height: 22px">
+                                        <td>
                                             Selling Rate</td>
                                         <td style="height: 22px">
-                                            <asp:Label ID="lblSRate" Text='' runat="server"></asp:Label>
+                                            <asp:Label ID="lblSRate" Text='<%#Eval("SRate") %>' runat="server"></asp:Label>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
                                             Provider (Supllier)</td>
                                         <td>
-                                            <asp:Label ID="lblProvider" Text='' runat="server"></asp:Label>
+                                            <asp:Label ID="lblProvider" Text='<%#Eval("SCode") %>' runat="server"></asp:Label>
+                                            <asp:Label ID="lblSupllier" Text='<%#Eval("SName") %>' runat="server"></asp:Label>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
                                             Base Unit</td>
                                         <td>
-                                            <asp:Label ID="lblBaseUnit" Text='' runat="server"></asp:Label>
+                                            <asp:Label ID="lblBaseUnit" Text='<%#Eval("BaseUnit") %>' runat="server"></asp:Label>
                                         </td>
                                     </tr>
                            
@@ -143,28 +157,28 @@
                                         <td>
                                             Minimum Level</td>
                                         <td>
-                                            <asp:Label ID="lblMinStock" runat="server" Text=''></asp:Label>
+                                            <asp:Label ID="lblMinStock" runat="server" Text='<%#Eval("MinStock") %>'></asp:Label>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
                                             Maximum Level</td>
                                         <td>
-                                            <asp:Label ID="lblMaxStock" runat="server" Text=''></asp:Label>
+                                            <asp:Label ID="lblMaxStock" runat="server" Text='<%#Eval("MaxStock") %>'></asp:Label>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
                                             Discount Type</td>
                                         <td>
-                                            <asp:Label ID="lblDiscType" runat="server" Text=''></asp:Label>
+                                            <asp:Label ID="lblDiscType" runat="server" Text='<%#Eval("DiscType") %>'></asp:Label>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
                                             Amount/Percentage</td>
                                         <td>
-                                            <asp:Label ID="lblAmount" runat="server" Text=''></asp:Label>
+                                            <asp:Label ID="lblAmount" runat="server" Text='<%#Eval("Amount") %>'></asp:Label>
                                         </td>
                                     </tr>
                                     <tr>
@@ -349,19 +363,22 @@
                                         <td>
                                             Parent</td>
                                         <td>
-                                            <asp:Label ID="lblIsProductParent" Text='<%# Eval("PName") %>' runat="server"></asp:Label>
+                                            <asp:TextBox ID="txtIsProductParent" runat="server" Width="200px" Text='<%# Eval("PName") %>'></asp:TextBox>
+                                            
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
                                             Product Code</td>
                                         <td>
-                                            <asp:Label ID="lblIsICode" Text='<%# Eval("Code") %>' runat="server"></asp:Label>
+                                            <asp:TextBox ID="txtIsICode" runat="server" Width="200px" Text='<%# Eval("Code") %>'></asp:TextBox>
+                                            
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            Product Group/Name</td>
+                                        <td><asp:Label ID="lblProductGrp" Text="Product Group" runat="server" Visible="false"></asp:Label>
+                                            <asp:Label ID="lblProductItm" Text="Product Name" runat="server" Visible="false"></asp:Label>
+                                         </td>
                                         <td>
                                             <asp:TextBox ID="txtIsIName" runat="server" Width="200px"></asp:TextBox>
                                         </td>

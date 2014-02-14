@@ -24,7 +24,8 @@ public partial class Inventory_Login : System.Web.UI.Page
         }
         else
         {
-            Response.Redirect("../Error.aspx");
+            //Response.Redirect("../Error.aspx");
+            Response.Redirect(GetRouteUrl("Error",null));
         }
     }
     protected void btnLogin_Click(object sender, EventArgs e)
@@ -35,7 +36,8 @@ public partial class Inventory_Login : System.Web.UI.Page
         }
         else
         {
-            Response.Redirect("Dashboard.aspx");
+            Response.Redirect(GetRouteUrl("Dashboard", null));
+            //Response.Redirect("Dashboard.aspx");
         }
     }
 

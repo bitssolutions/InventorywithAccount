@@ -22,7 +22,8 @@ public partial class Inventory_Dashboard : System.Web.UI.Page
         }
         else
         {
-            Response.Redirect("../Error.aspx");
+            //Response.Redirect("../Error.aspx");
+            Response.Redirect(GetRouteUrl("Error",null));
         }
     }
     static string UppercaseFirst(string username)
