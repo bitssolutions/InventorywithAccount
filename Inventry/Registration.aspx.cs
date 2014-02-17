@@ -12,7 +12,7 @@ using System.IO;
 
 public partial class _Default : System.Web.UI.Page
 {
-    CustomerRelated obj = new CustomerRelated();
+    GeneralRelated obj = new GeneralRelated();
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)

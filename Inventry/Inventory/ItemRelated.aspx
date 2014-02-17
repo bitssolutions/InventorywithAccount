@@ -71,37 +71,47 @@
                                         <td>
                                             Product Code</td>
                                         <td>
+                                             <asp:Label ID="lblProductSex" Text='<%#Eval("Sex") %>' runat="server"></asp:Label>
                                             <asp:Label ID="lblProductCode" Text='<%#Eval("Code") %>' runat="server"></asp:Label>
+                                           
                                         </td>
                                     </tr>
-                                   <%-- <% 
-                                        string[] Diff = TreeView1.SelectedNode.Value.Split('-');
-                                        if (Diff[1]=="G")
+                                   <%
+                                       string[] Diff = TreeView1.SelectedNode.Value.Split('-');
+                                       string[] DiffUpDt;
+                                       if (Diff[1] == "A")
                                         {
-                                            ((Label)TreeView1.FindControl("lblProductGrp")).Visible = true;
+                                            DiffUpDt = TreeView1.SelectedNode.Parent.Value.Split('-');
+                                            lblType.Text = DiffUpDt[1];
                                         }
                                         else
                                         {
-                                            ((Label)TreeView1.FindControl("lblProductItm")).Visible=true;
+                                            DiffUpDt = TreeView1.SelectedNode.Value.Split('-');
+                                            lblType.Text = DiffUpDt[1];
                                         }
-                                         %>--%>
+
+                                       if (DiffUpDt[1]=="A")
+                                       {
+                                           ((Label)FormView1.FindControl("lblProductItm")).Visible = true;
+                                       }
+                                       else if(DiffUpDt[1]=="G")
+                                       {
+                                           ((Label)FormView1.FindControl("lblProductGrp")).Visible = true;
+                                       }
+                                      
+                                    %>
+                                   
                                     <tr>
                                         <td>
-                                            <asp:Label ID="lblProductGrp" Text="Product Group" runat="server" Visible="false"></asp:Label>
                                             <asp:Label ID="lblProductItm" Text="Product Name" runat="server" Visible="false"></asp:Label>
-                                            Product Group/Name</td>
+                                            <asp:Label ID="lblProductGrp" Text="Product Group" runat="server" Visible="false"></asp:Label>
+                                           
+                                           <%-- Product Group/Name--%></td>
                                         <td>
                                             <asp:Label ID="lblProductGroup" Text='<%#Eval("IName") %>' runat="server"></asp:Label>
                                         </td>
                                     </tr>
                           
-                                   <%-- <tr>
-                                        <td>
-                                            Product Name</td>
-                                        <td>
-                                            <asp:Label ID="lblProductName" Text='<%# Eval("AddT") %>' runat="server"></asp:Label>
-                                        </td>
-                                    </tr>--%>
                                     <tr>
                                         <td>
                                             Product Name Details</td>
@@ -205,21 +215,21 @@
                                         <td>
                                             Parent</td>
                                         <td>
-                                            <asp:Label ID="lblEditProductParent" Text='<%# Eval("PName") %>' runat="server"></asp:Label>
+                                            <asp:TextBox ID="txtEditProductParent" runat="server" Width="200px" Text='<%# Bind("PName") %>'></asp:TextBox>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
                                             Product Code</td>
                                         <td>
-                                            <asp:Label ID="lblEditICode" Text='<%# Eval("Code") %>' runat="server"></asp:Label>
+                                            <asp:TextBox ID="txtEditCode" runat="server" Width="200px" Text='<%# Bind("Code") %>'></asp:TextBox>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
                                             Product Group/Name</td>
                                         <td>
-                                            <asp:TextBox ID="txtEditIName" runat="server" Width="200px"></asp:TextBox>
+                                            <asp:TextBox ID="txtEditIName" runat="server" Width="200px" Text='<%# Bind("IName") %>'></asp:TextBox>
                                         </td>
                                     </tr>
                           
@@ -227,53 +237,55 @@
                                         <td>
                                             Product Name Details</td>
                                         <td>
-                                            <asp:TextBox ID="txtEditItName" runat="server" Width="200px"></asp:TextBox>
+                                            <asp:TextBox ID="txtEditItName" runat="server" Width="200px" Text='<%# Bind("ItName") %>'></asp:TextBox>
                                         </td>
                                     </tr>
+                                 <% if (lblType.Text == "A")
+                                    { %>
                                     <tr>
                                         <td>
                                             Company Rate</td>
                                         <td>
-                                            <asp:TextBox ID="txtEditCRate" runat="server" Width="200px"></asp:TextBox>
+                                            <asp:TextBox ID="txtEditCRate" runat="server" Width="200px" Text='<%# Bind("CRate") %>'></asp:TextBox>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
                                             Purchase Rate</td>
                                         <td>
-                                            <asp:TextBox ID="txtEditPRate" runat="server" Width="200px"></asp:TextBox>
+                                            <asp:TextBox ID="txtEditPRate" runat="server" Width="200px" Text='<%# Bind("PRate") %>'></asp:TextBox>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
                                             Wholesale Rate</td>
                                         <td>
-                                            <asp:TextBox ID="txtEditWRate" runat="server" Width="200px"></asp:TextBox>
+                                            <asp:TextBox ID="txtEditWRate" runat="server" Width="200px" Text='<%# Bind("WRate") %>'></asp:TextBox>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td style="height: 22px">
                                             Selling Rate</td>
                                         <td style="height: 22px">
-                                            <asp:TextBox ID="txtEditSRate" runat="server" Width="200px"></asp:TextBox>
+                                            <asp:TextBox ID="txtEditSRate" runat="server" Width="200px" Text='<%# Bind("SRate") %>'></asp:TextBox>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
                                             Provider (Supllier)</td>
                                         <td>
-                                            <asp:DropDownList ID="ddlListEditSupllier" runat="server">
-                                            </asp:DropDownList>
+                                            <%--<asp:DropDownList ID="ddlListEditSupllier" runat="server">
+                                            </asp:DropDownList>--%>
                                             &nbsp;
-                                            <asp:TextBox ID="txtEditACode" runat="server" Width="100px"></asp:TextBox>
+                                            <asp:TextBox ID="txtEditACode" runat="server" Width="100px" Text='<%# Bind("Code") %>'></asp:TextBox>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
                                             Base Unit</td>
                                         <td>
-                                            <asp:DropDownList ID="ddlListEditBaseUnit" runat="server">
-                                            </asp:DropDownList>
+                                           <%-- <asp:DropDownList ID="ddlListEditBaseUnit" runat="server" Text='<%# Bind("BaseUnit") %>'>
+                                            </asp:DropDownList>--%>
                                         </td>
                                     </tr>
                         
@@ -282,14 +294,14 @@
                                         <td>
                                             Minimum Level</td>
                                         <td>
-                                            <asp:TextBox ID="txtEditMinStock" runat="server" Width="200px"></asp:TextBox>
+                                            <asp:TextBox ID="txtEditMinStock" runat="server" Width="200px" Text='<%# Bind("MinStock") %>'></asp:TextBox>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
                                             Maximum Level</td>
                                         <td>
-                                            <asp:TextBox ID="txtEditMaxStock" runat="server" Width="200px"></asp:TextBox>
+                                            <asp:TextBox ID="txtEditMaxStock" runat="server" Width="200px" Text='<%# Bind("MaxStock") %>'></asp:TextBox>
                                         </td>
                                     </tr>
                                     <tr>
@@ -297,7 +309,7 @@
                                             Discount Type</td>
                                         <td>
                                             <asp:RadioButtonList ID="rbdListEditDiscType" runat="server" 
-                                                RepeatDirection="Horizontal">
+                                                RepeatDirection="Horizontal"><%-- SelectedValue='<%#Bind("DiscType") %>'--%>
                                                 <asp:ListItem Value="F">Flat</asp:ListItem>
                                                 <asp:ListItem Value="P">Percentage</asp:ListItem>
                                             </asp:RadioButtonList>
@@ -307,7 +319,7 @@
                                         <td>
                                             Amount/Percentage</td>
                                         <td>
-                                            <asp:TextBox ID="txtEditAmount" runat="server" Width="200px"></asp:TextBox>
+                                            <asp:TextBox ID="txtEditAmount" runat="server" Width="200px" Text='<%# Bind("Amount") %>'></asp:TextBox>
                                         </td>
                                     </tr>
                                     <tr>
@@ -315,42 +327,42 @@
                                             VAT/None VAT</td>
                                         <td>
                                             <asp:RadioButtonList ID="rbdlistEditVat" runat="server" 
-                                                RepeatDirection="Horizontal">
+                                                RepeatDirection="Horizontal"> <%--SelectedValue='<%#Bind("VAT") %>'--%>
                                                 <asp:ListItem Value="V">VAT</asp:ListItem>
                                                 <asp:ListItem Value="N">None VAT</asp:ListItem>
                                             </asp:RadioButtonList>
                                         </td>
                                     </tr>
-
+                                  <%} %>
                                 </table>
                             </EditItemTemplate>
 
                             <InsertItemTemplate>
                             
-                          <%--  <%
+                            <%
                                 MasterRelated subdealerobj = new MasterRelated();
                                 
                                 string[] Diff = TreeView1.SelectedNode.Value.Split('-');
-                               if (Diff[1] == "A")
+                                if (Diff[1] == "A")
                                 {
                                     string[] DiffUpDt = TreeView1.SelectedNode.Parent.Value.Split('-');
-                                    ((TextBox)FormView1.FindControl("txtNewAccountGrp")).Text = TreeView1.SelectedNode.Parent.Text;
-                                  }
+                                    ((TextBox)FormView1.FindControl("txtIsProductParent")).Text = TreeView1.SelectedNode.Parent.Text;
+                                }
                                 else
                                 {
                                     string[] DiffUpDt = TreeView1.SelectedNode.Value.Split('-');
-                                    ((TextBox)FormView1.FindControl("txtNewAccountGrp")).Text = TreeView1.SelectedNode.Text;
+                                    ((TextBox)FormView1.FindControl("txtIsProductParent")).Text = TreeView1.SelectedNode.Text;
                                 }
                              %>
                                 <%
-                                    System.Data.DataTable accode = subdealerobj.generateMaxNumber("SD", "HO");
+                                    System.Data.DataTable accode = subdealerobj.generateMaxNumber("II", "HO");
                                     if (accode.Rows.Count > 0)
                                     {
-                                        ((TextBox)FormView1.FindControl("txtNewAccountCode")).Text = accode.Rows[0][0].ToString();
+                                        ((TextBox)FormView1.FindControl("txtIsICode")).Text = accode.Rows[0][0].ToString();
                                     }
                                     
                                 %>
-                            --%>
+                            
                                  <table style="width: 450px">
                                    <tr>
                                     <th colspan="2">
@@ -363,7 +375,7 @@
                                         <td>
                                             Parent</td>
                                         <td>
-                                            <asp:TextBox ID="txtIsProductParent" runat="server" Width="200px" Text='<%# Eval("PName") %>'></asp:TextBox>
+                                            <asp:TextBox ID="txtIsProductParent" runat="server" Width="200px" Text='' ReadOnly="true"></asp:TextBox>
                                             
                                         </td>
                                     </tr>
@@ -371,7 +383,7 @@
                                         <td>
                                             Product Code</td>
                                         <td>
-                                            <asp:TextBox ID="txtIsICode" runat="server" Width="200px" Text='<%# Eval("Code") %>'></asp:TextBox>
+                                            <asp:TextBox ID="txtIsICode" runat="server" Width="200px" Text='' ReadOnly="true"></asp:TextBox>
                                             
                                         </td>
                                     </tr>

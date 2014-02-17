@@ -9,7 +9,7 @@ using System.Data;
 public partial class Inventory_Login : System.Web.UI.Page
 {
    
-    UserRelated obj = new UserRelated();
+    GeneralRelated obj = new GeneralRelated();
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Session["username"] != null)

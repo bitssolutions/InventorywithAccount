@@ -2,25 +2,39 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Data;
 using System.Data.SqlClient;
+using System.Data;
 
 /// <summary>
-/// All Functions Related to Users of the system
+/// All Function related to Customer
 /// </summary>
-public class UserRelated
+public class GeneralRelated
 {
+    //customer Registration
 
-    public DataTable CheckUserLogin(string AName,string APassword)
+    public int RegisterCustomer(string cname,string cpassword,string email,string mobile)
+    {
+        SqlParameter[] param=new SqlParameter[5];
+        param[0] = new SqlParameter("@CName", cname);
+        param[1] = new SqlParameter("@CPassWord", cpassword);
+        param[2] = new SqlParameter("@EMail", email);
+        param[3] = new SqlParameter("@Mobile", mobile);
+        param[4] = new SqlParameter("@IfErrorMsg", SqlDbType.NChar, 254);
+        param[4].Direction = ParameterDirection.Output;
+        return DataAccessLayer.ExecuteProc("CustomerRegistrationRelated",param);
+    }
+
+   
+    public DataTable CheckUserLogin(string AName, string APassword)
     {
         SqlParameter[] param = new SqlParameter[3];
-        param[0] = new SqlParameter("@AName",AName);
-        param[1] = new SqlParameter("@APassWord",APassword);
+        param[0] = new SqlParameter("@AName", AName);
+        param[1] = new SqlParameter("@APassWord", APassword);
         param[2] = new SqlParameter("@IfErrorMsg", SqlDbType.NChar, 254);
         param[2].Direction = ParameterDirection.Output;
         ////string strMessage = param[2].Value.ToString();
         return DataAccessLayer.getTable("CheckLogin", param);
-        
+
     }
 
     public string CheckUserExists(string AName, string APassword)
@@ -35,8 +49,8 @@ public class UserRelated
     }
 
     public int UpdateAdminTypeUser(string AName, string APassword)
-    { 
-        SqlParameter[] param=new SqlParameter[3];
+    {
+        SqlParameter[] param = new SqlParameter[3];
         param[0] = new SqlParameter("@AName", AName);
         param[1] = new SqlParameter("@APassWord", APassword);
         param[2] = new SqlParameter("@IfErrorMsg", SqlDbType.NChar, 254);
@@ -49,7 +63,7 @@ public class UserRelated
         string status = "Y";
         Boolean yearisfrom = false;
         Boolean yearisto = false;
-        SqlParameter[] param=new SqlParameter[4];
+        SqlParameter[] param = new SqlParameter[4];
         param[0] = new SqlParameter("@Status", status);
         param[1] = new SqlParameter("@YearIsFrom", yearisfrom);
         param[2] = new SqlParameter("@YearIsTo", yearisto);
@@ -60,14 +74,14 @@ public class UserRelated
 
     public int InsertFisicalYear(string physicalyear)
     {
-        string status="I";
+        string status = "I";
         SqlParameter[] param = new SqlParameter[2];
-        param[0]=new SqlParameter("@Status",status);
-        param[1] = new SqlParameter("@YearIsFrom",physicalyear);
-        return DataAccessLayer.ExecuteProc("YearListsAndRelated",param);
+        param[0] = new SqlParameter("@Status", status);
+        param[1] = new SqlParameter("@YearIsFrom", physicalyear);
+        return DataAccessLayer.ExecuteProc("YearListsAndRelated", param);
     }
 
-    public DataTable getSubDealers(string username,string password)
+    public DataTable getSubDealers(string username, string password)
     {
         SqlParameter[] param = new SqlParameter[3];
         param[0] = new SqlParameter("@Name", username);
@@ -76,5 +90,4 @@ public class UserRelated
         param[2].Direction = ParameterDirection.Output;
         return DataAccessLayer.getTable("SubDealerLists", param);
     }
-   
 }

@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 public partial class Change_Password : System.Web.UI.Page
 {
-    UserRelated obj = new UserRelated();
+    GeneralRelated ob = new GeneralRelated();
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Session["username"] != null)
@@ -27,7 +27,7 @@ public partial class Change_Password : System.Web.UI.Page
     {
         if (txtNewPassword.Text==txtConfirmPassword.Text)
         {
-            int i = obj.UpdateAdminTypeUser(txtUsername.Text, txtNewPassword.Text);
+            int i = ob.UpdateAdminTypeUser(txtUsername.Text, txtNewPassword.Text);
             if (i>0)
             {
                 Response.Redirect("~/UserLogin.aspx");

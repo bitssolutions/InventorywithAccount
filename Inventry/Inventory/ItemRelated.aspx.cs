@@ -129,8 +129,8 @@ public partial class Inventory_ItemRelated : System.Web.UI.Page
 
         if (e.CommandName == "Edit")
         {
-            if (Diff[3] == "Y")
-            {
+            //if (Diff[3] == "Y")
+            //{
                 FormView1.ChangeMode(FormViewMode.Edit);
                 DataTable iteminfo = itemobj.LoadItemDetails(Diff[0]);
                 if (iteminfo.Rows.Count > 0)
@@ -138,11 +138,11 @@ public partial class Inventory_ItemRelated : System.Web.UI.Page
                     FormView1.DataSource = iteminfo;
                     FormView1.DataBind();
                 }
-            }
-            else
-            {
-                lblMsg.Text = "Master Account can't Edit.";
-            }
+            //}
+            //else
+            //{
+            //    lblMsg.Text = "Master Account can't Edit.";
+            //}
         }
 
         if (e.CommandName == "edit")

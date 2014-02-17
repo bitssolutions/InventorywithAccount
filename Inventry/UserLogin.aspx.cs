@@ -12,7 +12,7 @@ using System.IO;
 
 public partial class UserLogin : System.Web.UI.Page
 {
-    UserRelated obj = new UserRelated();
+    GeneralRelated obj = new GeneralRelated();
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -24,8 +24,8 @@ public partial class UserLogin : System.Web.UI.Page
     protected void btnLogin_Click(object sender, EventArgs e)
     {
         string password = Helper.ComputeHash(txtPassword.Text, "SHA512", null);
-
         DataTable dt = obj.CheckUserLogin(txtUsername.Text, txtPassword.Text);
+       
         if (dt.Rows.Count > 0)
         {
 
@@ -67,23 +67,7 @@ public partial class UserLogin : System.Web.UI.Page
         {
             lbmMessage.Text = "Username and Password doesn't exists!";
         }
-        //string userexist = obj.CheckUserExists(txtUsername.Text, txtPassword.Text);
-        //if (userexist.Length > 0)
-        //{
-        //    lbmMessage.Text = userexist;
-        //    if (userexist.)
-        //    {
-                
-        //    }
-        //    //if (userexist.=="A")
-        //    //{
-                
-        //    //}
-        //}
-        //else
-        //{
-        //    lbmMessage.Text = userexist;
-        //}
+       
     }
 
     protected void btnRegister_Click(object sender, EventArgs e)
