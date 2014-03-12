@@ -1,11 +1,11 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="UserLogin.aspx.cs" Inherits="UserLogin" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ForgotPassword.aspx.cs" Inherits="ForgotPassword" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>UserLogin</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Forgot Password</title>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <link href="Resourses/dist/css/bootstap.min.css" rel="stylesheet" type="text/css" />
    
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
@@ -75,15 +75,13 @@
 		    }
 			
 		</style>
-       
-	   
 </head>
 <body>
     <div class="container">
 			<div class="row">
 				<div class="box">
 						<div class="well">
-							<legend><div class="gradient1"><h1><span></span>Login</h1></div></legend>
+							<legend><div class="gradient1"><h1><span></span>Forgot Password</h1></div></legend>
 								<form id="form1" runat="server" class="form-horizontal">
 								  <div class="form-group">
 									<label for="txtUsername" class="col-lg-3 control-label"><strong style="color: #666666;">Username</strong></label>
@@ -95,7 +93,7 @@
 									</div>
 								  </div>
 								  <div class="form-group">
-									<label for="txtPassword" class="col-lg-3 control-label"><strong style="color: #666666;">Password</strong></label>
+									<label for="txtNewPassword" class="col-lg-3 control-label"><strong style="color: #666666;">New Password</strong></label>
 									<div class="col-lg-8">
 										<div class="input-group">
 										<span class="input-group-addon"><i class="glyphicon glyphicon-certificate"></i></span>
@@ -103,26 +101,16 @@
 									  </div>
 									</div>
 								  </div>
+								
 								  <div class="form-group">
 									<div class="col-lg-offset-3 col-lg-10">
-									  <div class="checkbox">
-										<label style="color: #deffed;">
-                                         <asp:CheckBox ID="chkRemember" runat="server" />Keep me logged in
-										</label>
-									  </div>
-									</div>
-								  </div>
-								  <div class="form-group">
-									<div class="col-lg-offset-3 col-lg-10">
-                                        <asp:Button ID="btnLogin" runat="server" Text="Log in" class="btn btn-default" 
-                                            onclick="btnLogin_Click" />
+                                        <asp:Button ID="btnChangePassword" runat="server" Text="Change Password" 
+                                            class="btn btn-default" onclick="btnChangePassword_Click" 
+                                             />
 							 &nbsp;&nbsp;&nbsp;
-                                        <asp:Button ID="btnRegister" runat="server" Text="Register" 
-                                            class="btn btn-default" onclick="btnRegister_Click" />
-                                &nbsp;&nbsp;&nbsp;
-                                <asp:Button ID="btnResetPassword" runat="server" Text="Forget Password" 
-                                            class="btn btn-default" onclick="btnResetPassword_Click" />
-                                        </br><asp:Label ID="lbmMessage" runat="server" Text="" class="textcolor"></asp:Label>
+                                        <asp:Button ID="btnCancel" runat="server" Text="Cancel" 
+                                            class="btn btn-default"  />
+                                ><asp:Label ID="lbmMessage" runat="server" Text="" class="textcolor"></asp:Label>
                                    </div>
 								  </div>
                                 </form>

@@ -20,19 +20,26 @@ public partial class _Default : System.Web.UI.Page
             
         }
     }
-   
+
+    private void Cleartexbox()
+    {
+        txtCustomerName.Text = string.Empty;
+        txtPassword.Text = string.Empty;
+        txtRepassword.Text = string.Empty;
+        txtEmail.Text = string.Empty;
+        txtMobile.Text = string.Empty;
+    }
     protected void btnRegister_Click(object sender, EventArgs e)
     {
-        //byte[] passBytes = System.Text.Encoding.Unicode.GetBytes(txtPassword.Text);
-        //string encryptPassword = Convert.ToBase64String(passBytes);
-        //string epassword = Helper.ComputeHash(txtPassword.Text, "SHA512", null);
          
         if (txtPassword.Text==txtRepassword.Text)
         {
+            string ePass = Helper.ComputeHash(txtPassword.Text, "SHA512", null);
 
-            int j = obj.RegisterCustomer(txtCustomerName.Text, txtPassword.Text, txtEmail.Text, txtMobile.Text);
+            int j = obj.RegisterCustomer(txtCustomerName.Text, ePass, txtEmail.Text, txtMobile.Text);
             if (j>0)
             {
+                Cleartexbox();
                 lblMsg.Text = "Registration Sucess..!!";
             }
         }
@@ -50,20 +57,7 @@ public partial class _Default : System.Web.UI.Page
         txtMobile.Text = "";
     }
 
-    //public string Encrypt(string str)
-    //{
-    //    string EncrptKey = "2013;[pnuLIT)WebCodeExpert";
-    //    byte[] byKey = { };
-    //    byte[] IV = { 18, 52, 86, 120, 144, 171, 205, 239 };
-    //    byKey = System.Text.Encoding.UTF8.GetBytes(EncrptKey.Substring(0, 8));
-    //    DESCryptoServiceProvider des = new DESCryptoServiceProvider();
-    //    byte[] inputByteArray = Encoding.UTF8.GetBytes(str);
-    //    MemoryStream ms = new MemoryStream();
-    //    CryptoStream cs = new CryptoStream(ms, des.CreateEncryptor(byKey, IV), CryptoStreamMode.Write);
-    //    cs.Write(inputByteArray, 0, inputByteArray.Length);
-    //    cs.FlushFinalBlock();
-    //    return Convert.ToBase64String(ms.ToArray());
-    //}
+   
    
    
 }

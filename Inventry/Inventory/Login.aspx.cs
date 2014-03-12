@@ -71,6 +71,7 @@ public partial class Inventory_Login : System.Web.UI.Page
     protected void btnRegister_Click(object sender, EventArgs e)
     {
         Response.Redirect("~/UserLogin.aspx");
+        
     }
     protected void ddlDealearList_SelectedIndexChanged(object sender, EventArgs e)
     {

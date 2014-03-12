@@ -6,7 +6,7 @@ using System.Security.Cryptography;
 using System.Text;
 
 /// <summary>
-/// Summary description for Helper
+/// @Ridhhi Kumar Shrestha
 /// </summary>
 public class Helper
 {

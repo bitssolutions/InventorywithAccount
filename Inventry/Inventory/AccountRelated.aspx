@@ -382,6 +382,7 @@
                             
                             <%
                                 MasterRelated accountobj = new MasterRelated();
+                                GeneralRelated generalobj = new GeneralRelated();
                                 
                                 string[] Diff = TreeView1.SelectedNode.Value.Split('-');
                                if (Diff[1] == "A")
@@ -396,7 +397,7 @@
                                 }
                              %>
                                 <%
-                                    System.Data.DataTable accode = accountobj.generateMaxNumber("AC", "HO");
+                                    System.Data.DataTable accode = generalobj.generateMaxNumber("AC", "HO");
                                     if (accode.Rows.Count > 0)
                                     {
                                         ((TextBox)FormView1.FindControl("txtNewAccountCode")).Text = accode.Rows[0][0].ToString();
@@ -572,11 +573,11 @@
                                         <td colspan="2">
                                             <br />
                                             <asp:RadioButton ID="rbdNewIndividual" runat="server" Text="Individual" 
-                                                GroupName="OwnerNew" OnCheckedChanged="Owner_CheckedChanged"/>
+                                                GroupName="OwnerNew" Checked="true"/>
                                              <asp:RadioButton ID="rbdNewSubDealer" runat="server"  Text="Sub Dealer" 
-                                              OnCheckedChanged="Owner_CheckedChanged" GroupName="OwnerNew" />
+                                               GroupName="OwnerNew" />
                                               <asp:RadioButton ID="rbdNewCommon" runat="server" Text="Common" 
-                                                GroupName="OwnerNew" OnCheckedChanged="Owner_CheckedChanged"/>
+                                                GroupName="OwnerNew" />
                                         </td>
                                     </tr>
 

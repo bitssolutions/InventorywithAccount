@@ -23,7 +23,6 @@ public partial class UserLogin : System.Web.UI.Page
     
     protected void btnLogin_Click(object sender, EventArgs e)
     {
-        string password = Helper.ComputeHash(txtPassword.Text, "SHA512", null);
         DataTable dt = obj.CheckUserLogin(txtUsername.Text, txtPassword.Text);
        
         if (dt.Rows.Count > 0)
@@ -43,7 +42,7 @@ public partial class UserLogin : System.Web.UI.Page
                 {
                     Session.Add("usercode", dt.Rows[0][0].ToString());
                     Response.Redirect(GetRouteUrl("Login", null));
-                   // Response.Redirect("~/Inventory/Login.aspx"); //Inventory ma chirne
+                    // Response.Redirect("~/Inventory/Login.aspx"); //Inventory ma chirne
                 }
             }
             else if (dt.Rows[0][3].ToString() == "U")
@@ -51,7 +50,7 @@ public partial class UserLogin : System.Web.UI.Page
                 Session.Add("username", txtUsername.Text);
                 Session.Add("password", txtPassword.Text);
                 Session.Add("usercode", dt.Rows[0][0].ToString());
-               // Response.Redirect("~/Inventory/Login.aspx");
+                // Response.Redirect("~/Inventory/Login.aspx");
                 Response.Redirect(GetRouteUrl("Login", null));
             }
             else if (dt.Rows[0][3].ToString() == "R")
@@ -75,7 +74,11 @@ public partial class UserLogin : System.Web.UI.Page
         Response.Redirect("~/Registration.aspx");
     }
 
-    
 
-   
+
+
+    protected void btnResetPassword_Click(object sender, EventArgs e)
+    {
+
+    }
 }

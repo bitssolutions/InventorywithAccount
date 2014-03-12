@@ -10,7 +10,9 @@ public partial class Inventory_SubDealerCreate : System.Web.UI.Page
 {
     
     MasterRelated subdealerobj = new MasterRelated();
+    GeneralRelated generalobj = new GeneralRelated();
     Helper help = new Helper();
+
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Session["username"] != null)
@@ -183,7 +185,7 @@ public partial class Inventory_SubDealerCreate : System.Web.UI.Page
        
         if (e.CommandName == "create")
         {
-            DataTable code = subdealerobj.generateMaxNumber("SD", "HO");
+            DataTable code = generalobj.generateMaxNumber("SD", "HO");
             acode = code.Rows[0][0].ToString();
             string aname = ((TextBox)FormView1.FindControl("txtNewAccountDescription")).Text;
             string ucode = Session["usercode"].ToString();

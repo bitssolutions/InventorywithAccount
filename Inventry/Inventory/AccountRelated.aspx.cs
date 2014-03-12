@@ -10,6 +10,7 @@ public partial class Inventory_AccountRelated : System.Web.UI.Page
 {
 
     MasterRelated accountobj = new MasterRelated();
+    GeneralRelated generalobj = new GeneralRelated();
     Helper help = new Helper();
    
     protected void Page_Load(object sender, EventArgs e)
@@ -150,10 +151,19 @@ public partial class Inventory_AccountRelated : System.Web.UI.Page
     protected void FormView1_ItemCommand(object sender, FormViewCommandEventArgs e)
     {
         string atype = "", parent = "", owner = "", TAdd, PAdd, CPerson, Tel, Mob, Email, Web, Rem;
+        string[] DiffUpDt;
         int alevels;
         string chkValue = TreeView1.SelectedNode.Value;
         string[] Diff = TreeView1.SelectedNode.Value.Split('-');
-        string[] DiffUpDt = TreeView1.SelectedNode.Parent.Value.Split('-');
+
+        if (Diff[0]!=Request.QueryString["Account"].ToString())
+        {
+            DiffUpDt = TreeView1.SelectedNode.Parent.Value.Split('-');
+        }
+        else
+        {
+            DiffUpDt = TreeView1.SelectedNode.Value.Split('-');
+        }
 
         if (e.CommandName == "Edit")
         {
@@ -202,11 +212,11 @@ public partial class Inventory_AccountRelated : System.Web.UI.Page
                 Rem = null;
             }
 
-            if (((RadioButton)FormView1.FindControl("rbdCommon")).Checked)
+            if (((RadioButton)FormView1.FindControl("rbdEditCommon")).Checked)
             {
                 owner = "Comm";
             }
-            else if (((RadioButton)FormView1.FindControl("rbdSubDealer")).Checked)
+            else if (((RadioButton)FormView1.FindControl("rbdEditSubDealer")).Checked)
             {
                 owner = "Sub";
             }
@@ -337,11 +347,11 @@ public partial class Inventory_AccountRelated : System.Web.UI.Page
                 Web = null;
                 Rem = null;
             }
-            if (((RadioButton)FormView1.FindControl("rbdCommon")).Checked)
+            if (((RadioButton)FormView1.FindControl("rbdNewCommon")).Checked == true)
             {
                 owner = "Comm";
             }
-            else if (((RadioButton)FormView1.FindControl("rbdSubDealer")).Checked)
+            else if (((RadioButton)FormView1.FindControl("rbdNewSubDealer")).Checked == true)
             {
                 owner = "Sub";
             }
@@ -350,7 +360,7 @@ public partial class Inventory_AccountRelated : System.Web.UI.Page
                 owner = Session["dealer"].ToString();
             }
             atype = lblType.Text;
-            DataTable accode = accountobj.generateMaxNumber("AC", "HO");
+            DataTable accode = generalobj.generateMaxNumber("AC", "HO");
             string acode = accode.Rows[0][0].ToString();
             //string acode = ((TextBox)FormView1.FindControl("txtNewAccountCode")).Text;
             string aname = ((TextBox)FormView1.FindControl("txtNewAccountDescription")).Text;
@@ -423,12 +433,5 @@ public partial class Inventory_AccountRelated : System.Web.UI.Page
     {
         //
     }
-    protected void Owner_CheckedChanged(object sender, EventArgs e)
-    {
-        //FormView1.ChangeMode(FormViewMode.Insert);
-        //if ((RadioButton)FormView1.FindControl("rbdCommon").Checked)
-        //{
-            
-        //}
-    }
+   
 }

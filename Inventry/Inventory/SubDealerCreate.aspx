@@ -164,10 +164,8 @@
                                             <asp:TextBox ID="txtEditAccountDescription" Text='<%#Bind("AName") %>' runat="server" Width="200px"></asp:TextBox>
                                         </td>
                                     </tr>
-                          
-                               
-                                
-                                    <tr>
+
+                                     <tr>
                                         <td>
                                             Address Temporary</td>
                                         <td>
@@ -240,6 +238,7 @@
                             
                             <%
                                 MasterRelated subdealerobj = new MasterRelated();
+                                GeneralRelated generalobj = new GeneralRelated();
                                 
                                 string[] Diff = TreeView1.SelectedNode.Value.Split('-');
                                if (Diff[1] == "A")
@@ -254,7 +253,7 @@
                                 }
                              %>
                                 <%
-                                    System.Data.DataTable accode = subdealerobj.generateMaxNumber("SD", "HO");
+                                    System.Data.DataTable accode = generalobj.generateMaxNumber("SD", "HO");
                                     if (accode.Rows.Count > 0)
                                     {
                                         ((TextBox)FormView1.FindControl("txtNewAccountCode")).Text = accode.Rows[0][0].ToString();

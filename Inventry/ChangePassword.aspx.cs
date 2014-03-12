@@ -27,7 +27,8 @@ public partial class Change_Password : System.Web.UI.Page
     {
         if (txtNewPassword.Text==txtConfirmPassword.Text)
         {
-            int i = ob.UpdateAdminTypeUser(txtUsername.Text, txtNewPassword.Text);
+            string ePass = Helper.ComputeHash(txtNewPassword.Text, "SHA512", null);
+            int i = ob.UpdateAdminTypeUser(txtUsername.Text, ePass);
             if (i>0)
             {
                 Response.Redirect("~/UserLogin.aspx");

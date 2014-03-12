@@ -7,6 +7,7 @@ using System.Data;
 
 /// <summary>
 /// Summary description for MasterRelated
+/// @Ridhhi Kumar Shrestha
 /// </summary>
 public class MasterRelated
 {
@@ -60,15 +61,7 @@ public class MasterRelated
     }
     //-------------- End of Account Related -----------------------------
 
-    // Generating Maximum Code Number
-    public DataTable generateMaxNumber(string type, string owner)
-    {
-        SqlParameter[] param = new SqlParameter[2];
-        param[0] = new SqlParameter("@Type", type);
-        param[1] = new SqlParameter("@Owner", owner);
-        return DataAccessLayer.getTable("GenerateMaxNumber", param);
-    }
-
+    
     //subdealer related start
     public string AllSubDealerRelated(string code, string aname, string usercode, string status, string addt, string addp, string conperson, string telephone, string mobile, string email, string webpage, string remarks, string showif)
     {
@@ -117,7 +110,7 @@ public class MasterRelated
     //---------------  Item Related Start ----------------------------
 
     // Item Delete/Edit/Insert Related by Status=D, E and I
-    public string AllItemRelated(string parent, string code, string iname, string type, int levels, string usercode, string status, string sex, string itname, string crate, string prate, string srate, string baseunit, string minstock, string maxstock, string disctype, string amount, string vat, string acode)
+    public string AllItemRelated(string parent, string code, string iname, string type, int levels, string usercode, string status, string sex, string itname, double crate, double prate, double srate, string baseunit, int minstock, int maxstock, string disctype, double amount, string vat, string scode)
     {
         SqlParameter[] param = new SqlParameter[20];
         param[0] = new SqlParameter("@Parent", parent);
@@ -138,7 +131,7 @@ public class MasterRelated
         param[15] = new SqlParameter("@DiscType", disctype);
         param[16] = new SqlParameter("@Amount", amount);
         param[17] = new SqlParameter("@VAT", vat);
-        param[18] = new SqlParameter("@ACode", acode);
+        param[18] = new SqlParameter("@SCode", scode);
         param[19] = new SqlParameter("@IfErrorMsg", SqlDbType.NChar, 254);
         param[19].Direction = ParameterDirection.Output;
         DataAccessLayer.ExecuteProc("ItemRelated", param);
@@ -160,6 +153,33 @@ public class MasterRelated
         param[0] = new SqlParameter("@Code", code);
         return DataAccessLayer.getTable("ItemInfo", param);
     }
+
+    //Load Supplier/provider lists
+    public DataTable getSubppliers(string parent,string owner, string usercode,string accountoritem)
+    {
+        SqlParameter[] param = new SqlParameter[4];
+        param[0] = new SqlParameter("@Parent", parent);
+        param[1] = new SqlParameter("@Owner", owner);
+        param[2] = new SqlParameter("@UserCode", usercode);
+        param[3] = new SqlParameter("@AccountOrItem", accountoritem);
+        return DataAccessLayer.getTable("ParentToChildEnd", param);
+    }
+
+    //Load Item Base Units
+    public DataTable getItemBaseUnit()
+    {
+        SqlParameter[] param = new SqlParameter[0];
+        return DataAccessLayer.getTable("BaseUnitLists", null);
+    }
+
+    //Load Wholesale Rate
+    public DataTable getWholeSaleRate(double prate)
+    {
+        SqlParameter[] param = new SqlParameter[1];
+        param[0] = new SqlParameter("@PRate", prate);
+        return DataAccessLayer.getTable("WholeSaleRateGenerate", param);
+    }
+
     //-------------- End Of Item Related -----------------------------
 
 }

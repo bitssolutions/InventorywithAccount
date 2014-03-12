@@ -4,9 +4,11 @@ using System.Linq;
 using System.Web;
 using System.Data.SqlClient;
 using System.Data;
+using System.Windows.Forms;
 
 /// <summary>
 /// All Function related to Customer
+/// @Ridhhi Kumar Shrestha
 /// </summary>
 public class GeneralRelated
 {
@@ -24,6 +26,14 @@ public class GeneralRelated
         return DataAccessLayer.ExecuteProc("CustomerRegistrationRelated",param);
     }
 
+    // Generating Maximum Code Number
+    public DataTable generateMaxNumber(string type, string owner)
+    {
+        SqlParameter[] param = new SqlParameter[2];
+        param[0] = new SqlParameter("@Type", type);
+        param[1] = new SqlParameter("@Owner", owner);
+        return DataAccessLayer.getTable("GenerateMaxNumber", param);
+    }
    
     public DataTable CheckUserLogin(string AName, string APassword)
     {
@@ -36,6 +46,8 @@ public class GeneralRelated
         return DataAccessLayer.getTable("CheckLogin", param);
 
     }
+
+    
 
     public string CheckUserExists(string AName, string APassword)
     {

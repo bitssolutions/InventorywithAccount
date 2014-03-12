@@ -5,14 +5,7 @@
         <div class="well">
               Welcome :
 				
-				<%-- <tr>
-                                        <td>
-                                            Product Name</td>
-                                        <td>
-                                            <asp:Label ID="lblProductName" Text='<%# Eval("AddT") %>' runat="server"></asp:Label>
-                                        </td>
-                                    </tr>--%>
-			    <asp:Label ID="lblUsername" runat="server" Text=""></asp:Label>
+				<asp:Label ID="lblUsername" runat="server" Text=""></asp:Label>
                 <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
         </div>
     </div>
@@ -27,20 +20,14 @@
                     </div>
                </div>
             </div>
-            <%-- <tr>
-                                        <td>
-                                            Product Name</td>
-                                        <td>
-                                            <asp:Label ID="lblProductName" Text='<%# Eval("AddT") %>' runat="server"></asp:Label>
-                                        </td>
-                                    </tr>--%>
+           
            <div class="col-lg-10">
                 <div class="well">
                     <div class="row">
                       
                       <asp:Label ID="lblType" runat="server" Visible="False"></asp:Label>
                       <asp:Label ID="lblDetail" runat="server" Text="" Visible="false"></asp:Label>
-                       <asp:FormView ID="FormView1" runat="server" Width="488px" DefaultMode="ReadOnly"
+                       <asp:FormView ID="FormView1" runat="server" Width="529px" DefaultMode="ReadOnly"
                             onmodechanging="FormView1_ModeChanging"
                             onitemcommand="FormView1_ItemCommand"  
                             onitemupdating="FormView1_ItemUpdating" 
@@ -51,13 +38,13 @@
                                 <tr>
                                     <th colspan="2">
                                         <asp:Button ID="btnItemGroup" runat="server" Text="Create Product Group" 
-                                            CommandName="CreateItemGroup" onclick="btnItemGroup_Click" />  
+                                            CommandName="CreateItemGroup" onclick="btnItemGroup_Click" Width="146px" />  
                                         <asp:Button ID="btnItemList" runat="server" Text="Create Product" 
-                                            CommandName="CreateItemList" onclick="btnItemList_Click" />  
+                                            CommandName="CreateItemList" onclick="btnItemList_Click" Width="120px"/>  
                                         <asp:Button ID="btnEdit" runat="server" Text="Edit" CommandName="Edit" 
-                                            TabIndex="3" Width="88px" /> 
+                                            TabIndex="3" Width="85px" /> 
                                         <asp:Button ID="btnDelete" runat="server" Text="Delete" CommandName="Delete" 
-                                            TabIndex="4" Width="88px" OnClientClick="return confirm('Are you sure want to delete?');"/>  
+                                            TabIndex="4" Width="85px" OnClientClick="return confirm('Are you sure want to delete?');"/>  
                                     </th>
                                 </tr>
                                 <tr>
@@ -195,7 +182,7 @@
                                         <td>
                                             VAT/None VAT</td>
                                         <td>
-                                            <asp:Label ID="lblVat" runat="server" Text=''></asp:Label>
+                                            <asp:Label ID="lblVat" runat="server" Text='<%#Eval("VAT") %>'></asp:Label>
                                         </td>
                                     </tr>
                                  
@@ -203,6 +190,53 @@
                             </ItemTemplate>
 
                             <EditItemTemplate>
+                             <%
+                                MasterRelated itemobj = new MasterRelated();
+                                System.Data.DataTable dt = itemobj.getItemBaseUnit();
+                                if (dt.Rows.Count > 0)
+                                {
+                                    ((DropDownList)FormView1.FindControl("ddlListEditBaseUnit")).DataSource = dt;
+                                    ((DropDownList)FormView1.FindControl("ddlListEditBaseUnit")).DataTextField = "UnitS";
+                                    ((DropDownList)FormView1.FindControl("ddlListEditBaseUnit")).DataValueField = "UnitS";
+                                    ((DropDownList)FormView1.FindControl("ddlListEditBaseUnit")).DataBind();
+                                    ((DropDownList)FormView1.FindControl("ddlListEditBaseUnit")).Items.Insert(0, new ListItem("--Select--", "0"));
+
+                                }
+   
+                              %>
+
+                              <%
+                                  string usercode = Session["usercode"].ToString();
+                                  string owner = Session["dealer"].ToString();
+                                  System.Data.DataTable suplier = itemobj.getSubppliers("SC1", owner, usercode, "A");
+                                  if (suplier.Rows.Count > 0)
+                                  {
+                                      ((DropDownList)FormView1.FindControl("ddlListEditSupllier")).DataSource = suplier;
+                                      ((DropDownList)FormView1.FindControl("ddlListEditSupllier")).DataTextField = "Name";
+                                      ((DropDownList)FormView1.FindControl("ddlListEditSupllier")).DataValueField = "Code";
+                                      ((DropDownList)FormView1.FindControl("ddlListEditSupllier")).DataBind();
+                                      ((DropDownList)FormView1.FindControl("ddlListEditSupllier")).Items.Insert(0, new ListItem("--Select--", "0"));
+                                  }
+                               %>
+                              
+                                 <script type="text/javascript">
+
+                                     function ddlEditChange() {
+                                         var ddl = document.getElementById('<%=((DropDownList)FormView1.FindControl("ddlListEditSupllier")).ClientID %>');
+                                         var textBox = document.getElementById('<%=((TextBox)FormView1.FindControl("txtEditACode")).ClientID%>');
+
+                                         textBox.value = ddl.options[ddl.selectedIndex].value;
+                                     }
+
+                                     function ddlEditBaseUnitChange() {
+                                         var ddl = document.getElementById('<%=((DropDownList)FormView1.FindControl("ddlListEditBaseUnit")).ClientID %>');
+                                         var textBox = document.getElementById('<%=((TextBox)FormView1.FindControl("txtEditBaseUnit")).ClientID%>');
+
+                                         textBox.value = ddl.options[ddl.selectedIndex].value;
+                                     }
+
+                             </script>
+                             
                                  <table style="width: 450px">
                                    <tr>
                                     <th colspan="2">
@@ -222,6 +256,11 @@
                                         <td>
                                             Product Code</td>
                                         <td>
+                                            <asp:DropDownList ID="ddlEditSex" runat="server">
+                                               <asp:ListItem>M</asp:ListItem>
+                                               <asp:ListItem>L</asp:ListItem>
+                                               <asp:ListItem>C</asp:ListItem>
+                                            </asp:DropDownList> 
                                             <asp:TextBox ID="txtEditCode" runat="server" Width="200px" Text='<%# Bind("Code") %>'></asp:TextBox>
                                         </td>
                                     </tr>
@@ -229,10 +268,16 @@
                                         <td>
                                             Product Group/Name</td>
                                         <td>
-                                            <asp:TextBox ID="txtEditIName" runat="server" Width="200px" Text='<%# Bind("IName") %>'></asp:TextBox>
+                                            <asp:TextBox ID="txtEditIName" runat="server" Width="200px" 
+                                                Text='<%# Bind("IName") %>' AutoPostBack="True" 
+                                                ontextchanged="txtEditIName_TextChanged"></asp:TextBox>
                                         </td>
                                     </tr>
                           
+                                    
+                                 <% if (lblType.Text == "A")
+                                    { %>
+
                                     <tr>
                                         <td>
                                             Product Name Details</td>
@@ -240,8 +285,7 @@
                                             <asp:TextBox ID="txtEditItName" runat="server" Width="200px" Text='<%# Bind("ItName") %>'></asp:TextBox>
                                         </td>
                                     </tr>
-                                 <% if (lblType.Text == "A")
-                                    { %>
+
                                     <tr>
                                         <td>
                                             Company Rate</td>
@@ -253,7 +297,9 @@
                                         <td>
                                             Purchase Rate</td>
                                         <td>
-                                            <asp:TextBox ID="txtEditPRate" runat="server" Width="200px" Text='<%# Bind("PRate") %>'></asp:TextBox>
+                                            <asp:TextBox ID="txtEditPRate" runat="server" Width="200px" 
+                                                Text='<%# Bind("PRate") %>' AutoPostBack="True" 
+                                                ontextchanged="txtEditPRate_TextChanged"></asp:TextBox>
                                         </td>
                                     </tr>
                                     <tr>
@@ -274,18 +320,20 @@
                                         <td>
                                             Provider (Supllier)</td>
                                         <td>
-                                            <%--<asp:DropDownList ID="ddlListEditSupllier" runat="server">
-                                            </asp:DropDownList>--%>
+                                            <asp:DropDownList ID="ddlListEditSupllier" runat="server" onchange="ddlEditChange()">
+                                            </asp:DropDownList>
                                             &nbsp;
-                                            <asp:TextBox ID="txtEditACode" runat="server" Width="100px" Text='<%# Bind("Code") %>'></asp:TextBox>
+                                            <asp:TextBox ID="txtEditACode" runat="server" Width="100px" Text='<%# Bind("SCode") %>'></asp:TextBox>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
                                             Base Unit</td>
                                         <td>
-                                           <%-- <asp:DropDownList ID="ddlListEditBaseUnit" runat="server" Text='<%# Bind("BaseUnit") %>'>
-                                            </asp:DropDownList>--%>
+                                            <asp:DropDownList ID="ddlListEditBaseUnit" runat="server" onchange="ddlEditBaseUnitChange()">
+                                            </asp:DropDownList>
+                                            &nbsp;
+                                            <asp:TextBox ID="txtEditBaseUnit" runat="server" Text='<%#Bind("BaseUnit") %>'></asp:TextBox>
                                         </td>
                                     </tr>
                         
@@ -304,15 +352,45 @@
                                             <asp:TextBox ID="txtEditMaxStock" runat="server" Width="200px" Text='<%# Bind("MaxStock") %>'></asp:TextBox>
                                         </td>
                                     </tr>
+                                    <%
+                                        string[] Diff = TreeView1.SelectedNode.Value.Split('-');
+                                        //MasterRelated itemobj = new MasterRelated();
+                                        System.Data.DataTable item = itemobj.LoadItemDetails(Diff[0]);
+                                        if (item.Rows.Count > 0)
+                                        {
+                                            if (item.Rows[0][17].ToString() == "F")
+                                            {
+                                                 ((RadioButton)FormView1.FindControl("rbdFlat")).Checked=true;
+                                            }
+                                            else if (item.Rows[0][17].ToString() == "P")
+                                            {
+                                                ((RadioButton)FormView1.FindControl("rbdPercentage")).Checked=true;
+                                            }
+                                            else
+                                            {
+                                                ((RadioButton)FormView1.FindControl("rbdNone")).Checked = true;
+                                            }
+                                        }
+
+                                        if (item.Rows.Count>0)
+                                        {
+                                            if (item.Rows[0][19].ToString()=="V")
+                                            {
+                                                ((RadioButton)FormView1.FindControl("rbdVat")).Checked = true;
+                                            }
+                                            else
+                                            {
+                                                ((RadioButton)FormView1.FindControl("rbdNonVat")).Checked = true;
+                                            }
+                                        }
+                                     %>
                                     <tr>
                                         <td>
                                             Discount Type</td>
                                         <td>
-                                            <asp:RadioButtonList ID="rbdListEditDiscType" runat="server" 
-                                                RepeatDirection="Horizontal"><%-- SelectedValue='<%#Bind("DiscType") %>'--%>
-                                                <asp:ListItem Value="F">Flat</asp:ListItem>
-                                                <asp:ListItem Value="P">Percentage</asp:ListItem>
-                                            </asp:RadioButtonList>
+                                             <asp:RadioButton ID="rbdFlat" runat="server" Text="Flat" Value="F" GroupName="DiscType" />
+                                             <asp:RadioButton ID="rbdPercentage" runat="server" Text="Percentage" Value="P" GroupName="DiscType"/>
+                                             <asp:RadioButton ID="rbdNone" runat="server" Text="None" Value="N" GroupName="DiscType"/>
                                         </td>
                                     </tr>
                                     <tr>
@@ -326,11 +404,8 @@
                                         <td>
                                             VAT/None VAT</td>
                                         <td>
-                                            <asp:RadioButtonList ID="rbdlistEditVat" runat="server" 
-                                                RepeatDirection="Horizontal"> <%--SelectedValue='<%#Bind("VAT") %>'--%>
-                                                <asp:ListItem Value="V">VAT</asp:ListItem>
-                                                <asp:ListItem Value="N">None VAT</asp:ListItem>
-                                            </asp:RadioButtonList>
+                                             <asp:RadioButton ID="rbdVat" runat="server" Text="VAT" Value="V" GroupName="VATGroup" />
+                                             <asp:RadioButton ID="rbdNonVat" runat="server" Text="Non VAT" Value="N" GroupName="VATGroup"/>
                                         </td>
                                     </tr>
                                   <%} %>
@@ -340,8 +415,8 @@
                             <InsertItemTemplate>
                             
                             <%
-                                MasterRelated subdealerobj = new MasterRelated();
-                                
+                                MasterRelated itemobj = new MasterRelated();
+                                GeneralRelated generalobj = new GeneralRelated();
                                 string[] Diff = TreeView1.SelectedNode.Value.Split('-');
                                 if (Diff[1] == "A")
                                 {
@@ -354,15 +429,70 @@
                                     ((TextBox)FormView1.FindControl("txtIsProductParent")).Text = TreeView1.SelectedNode.Text;
                                 }
                              %>
-                                <%
-                                    System.Data.DataTable accode = subdealerobj.generateMaxNumber("II", "HO");
-                                    if (accode.Rows.Count > 0)
-                                    {
-                                        ((TextBox)FormView1.FindControl("txtIsICode")).Text = accode.Rows[0][0].ToString();
-                                    }
+                                <%if (lblType.Text == "A")
+                                  {
+                                      System.Data.DataTable accode = generalobj.generateMaxNumber("II", "HO");
+                                      if (accode.Rows.Count > 0)
+                                      {
+                                          ((TextBox)FormView1.FindControl("txtIsICode")).Text = accode.Rows[0][0].ToString();
+                                      }
+                                  }
+                                  else
+                                  {
+                                      System.Data.DataTable accode = generalobj.generateMaxNumber("IG", "HO");
+                                      if (accode.Rows.Count > 0)
+                                      {
+                                          ((TextBox)FormView1.FindControl("txtIsICode")).Text = accode.Rows[0][0].ToString();
+                                      }
+                                  }
                                     
                                 %>
-                            
+                            <%
+                                System.Data.DataTable dt = itemobj.getItemBaseUnit();
+                                if (dt.Rows.Count > 0)
+                                {
+                                    ((DropDownList)FormView1.FindControl("ddlListIsBaseUnit")).DataSource = dt;
+                                    ((DropDownList)FormView1.FindControl("ddlListIsBaseUnit")).DataTextField = "UnitS";
+                                    ((DropDownList)FormView1.FindControl("ddlListIsBaseUnit")).DataValueField = "UnitS";
+                                    ((DropDownList)FormView1.FindControl("ddlListIsBaseUnit")).DataBind();
+                                    ((DropDownList)FormView1.FindControl("ddlListIsBaseUnit")).Items.Insert(0, new ListItem("--Select--", "0"));
+
+                                }
+   
+                              %>
+
+                              <%
+                                  string usercode = Session["usercode"].ToString();
+                                  string owner = Session["dealer"].ToString();
+                                  System.Data.DataTable suplier = itemobj.getSubppliers("SC1", owner, usercode, "A");
+                                  if (suplier.Rows.Count > 0)
+                                  {
+                                      ((DropDownList)FormView1.FindControl("ddlListIsSupllier")).DataSource = suplier;
+                                      ((DropDownList)FormView1.FindControl("ddlListIsSupllier")).DataTextField = "Name";
+                                      ((DropDownList)FormView1.FindControl("ddlListIsSupllier")).DataValueField = "Code";
+                                      ((DropDownList)FormView1.FindControl("ddlListIsSupllier")).DataBind();
+                                      ((DropDownList)FormView1.FindControl("ddlListIsSupllier")).Items.Insert(0, new ListItem("--Select--", "0"));
+                                  }
+                               %>
+                              
+                               <script type="text/javascript">
+
+                                   function ddlChange() {
+                                       var ddl = document.getElementById('<%=((DropDownList)FormView1.FindControl("ddlListIsSupllier")).ClientID %>');
+                                       var textBox = document.getElementById('<%=((TextBox)FormView1.FindControl("txtIsACode")).ClientID%>');
+
+                                       textBox.value = ddl.options[ddl.selectedIndex].value;
+                                   }
+
+                                   function ddlBaseUnitChange() {
+                                       var ddl = document.getElementById('<%=((DropDownList)FormView1.FindControl("ddlListIsbaseUnit")).ClientID %>');
+                                       var textBox = document.getElementById('<%=((TextBox)FormView1.FindControl("txtIsBaseUnit")).ClientID%>');
+
+                                       textBox.value = ddl.options[ddl.selectedIndex].value;
+                                   }
+
+                             </script>
+                                
                                  <table style="width: 450px">
                                    <tr>
                                     <th colspan="2">
@@ -383,7 +513,17 @@
                                         <td>
                                             Product Code</td>
                                         <td>
-                                            <asp:TextBox ID="txtIsICode" runat="server" Width="200px" Text='' ReadOnly="true"></asp:TextBox>
+                                        <%if(lblType.Text=="A") { %>
+                                           <asp:DropDownList ID="ddlIsSex" runat="server">
+                                                
+                                               <asp:ListItem>M</asp:ListItem>
+                                               <asp:ListItem>L</asp:ListItem>
+                                               <asp:ListItem>C</asp:ListItem>
+                                                
+                                            </asp:DropDownList> 
+                                          <%} %>
+                                            <asp:TextBox ID="txtIsICode" runat="server" Width="162px" Text='' 
+                                                ReadOnly="true"></asp:TextBox>
                                             
                                         </td>
                                     </tr>
@@ -392,19 +532,22 @@
                                             <asp:Label ID="lblProductItm" Text="Product Name" runat="server" Visible="false"></asp:Label>
                                          </td>
                                         <td>
-                                            <asp:TextBox ID="txtIsIName" runat="server" Width="200px"></asp:TextBox>
+                                            <asp:TextBox ID="txtIsIName" runat="server" Width="200px" 
+                                                ontextchanged="txtIsIName_TextChanged" AutoPostBack="True" 
+                                                ></asp:TextBox>
                                         </td>
                                     </tr>
-                          
+                           <% if (lblType.Text == "A")
+                             { %>
                                     <tr>
                                         <td>
                                             Product Name Details</td>
                                         <td>
-                                            <asp:TextBox ID="txtIsItName" runat="server" Width="200px"></asp:TextBox>
+                                            <asp:TextBox ID="txtIsItName" runat="server" Width="200px" ReadOnly="True" 
+                                               ></asp:TextBox>
                                         </td>
                                     </tr>
-                        <% if (lblType.Text == "A")
-                          { %>
+                       
                                     <tr>
                                         <td>
                                             Company Rate</td>
@@ -416,14 +559,15 @@
                                         <td>
                                             Purchase Rate</td>
                                         <td>
-                                            <asp:TextBox ID="txtIsPRate" runat="server" Width="200px"></asp:TextBox>
+                                            <asp:TextBox ID="txtIsPRate" runat="server" Width="200px" AutoPostBack="True" 
+                                                ontextchanged="txtIsPRate_TextChanged"></asp:TextBox>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
                                             Wholesale Rate</td>
                                         <td>
-                                            <asp:TextBox ID="txtIsWRate" runat="server" Width="200px"></asp:TextBox>
+                                            <asp:TextBox ID="txtIsWRate" runat="server" Width="200px" ReadOnly="True"></asp:TextBox>
                                         </td>
                                     </tr>
                                     <tr>
@@ -437,19 +581,22 @@
                                         <td>
                                             Provider (Supllier)</td>
                                         <td>
-                                            <asp:DropDownList ID="ddlListIsSupllier" runat="server">
+                                            <asp:DropDownList ID="ddlListIsSupllier" runat="server" onchange="ddlChange()" 
+                                                >
                                             </asp:DropDownList>
                                             &nbsp;
-                                            <asp:TextBox ID="txtIsACode" runat="server" Width="100px"></asp:TextBox>
+                                            <asp:TextBox ID="txtIsACode" runat="server" Width="109px"></asp:TextBox>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
                                             Base Unit</td>
                                         <td>
-                                            <asp:DropDownList ID="ddlListIsBaseUnit" runat="server">
+                                            <asp:DropDownList ID="ddlListIsbaseUnit" runat="server" onchange="ddlBaseUnitChange()">
                                             </asp:DropDownList>
-                                        </td>
+                                            &nbsp;
+                                           <asp:TextBox ID="txtIsBaseUnit" runat="server"  Width="109px"></asp:TextBox>
+                                          </td>
                                     </tr>
                         
                                 
@@ -471,11 +618,12 @@
                                         <td>
                                             Discount Type</td>
                                         <td>
-                                            <asp:RadioButtonList ID="rbdListIsDiscType" runat="server" 
-                                                RepeatDirection="Horizontal">
-                                                <asp:ListItem Value="F">Flat</asp:ListItem>
-                                                <asp:ListItem Value="P">Percentage</asp:ListItem>
-                                            </asp:RadioButtonList>
+                                             <asp:RadioButton ID="rbdIsFlat" runat="server" Text="Flat" Value="F" GroupName="DiscIsType" />
+                                             <asp:RadioButton ID="rbdIsPercentage" runat="server" Text="Percentage" Value="P" GroupName="DiscIsType"/>
+                                             <asp:RadioButton ID="rbdIsNone" runat="server" Text="None" Value="N" 
+                                                 GroupName="DiscIsType" 
+                                                 />
+                                           
                                         </td>
                                     </tr>
                                     <tr>
@@ -489,11 +637,9 @@
                                         <td>
                                             VAT/None VAT</td>
                                         <td>
-                                            <asp:RadioButtonList ID="rbdlistIsVat" runat="server" 
-                                                RepeatDirection="Horizontal">
-                                                <asp:ListItem Value="V">VAT</asp:ListItem>
-                                                <asp:ListItem Value="N">None VAT</asp:ListItem>
-                                            </asp:RadioButtonList>
+                                            <asp:RadioButton ID="rbdIsVat" runat="server" Text="VAT" Value="V" GroupName="VatNonVat" />
+                                            <asp:RadioButton ID="rbdIsNonVat" runat="server" Text="None VAT" Value="N" GroupName="VatNonVat" />
+                                           
                                         </td>
                                     </tr>
                                     <%} %>
