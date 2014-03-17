@@ -183,7 +183,7 @@ public partial class Inventory_ItemRelated : System.Web.UI.Page
             itype = Diff[1];
             iname = ((TextBox)FormView1.FindControl("txtEditIName")).Text;
 
-            if (Diff[1] == "A")                                                   //Diff[1] == "G"
+            if (Diff[1] == "A")                                                   
             {
                 isex = ((DropDownList)FormView1.FindControl("ddlEditSex")).Text;
                 itname = ((TextBox)FormView1.FindControl("txtEditItName")).Text;
@@ -196,8 +196,33 @@ public partial class Inventory_ItemRelated : System.Web.UI.Page
                 minstock = Convert.ToInt32(((TextBox)FormView1.FindControl("txtEditMinStock")).Text);
                 maxstock = Convert.ToInt32(((TextBox)FormView1.FindControl("txtEditMaxStock")).Text);
 
+                if (((RadioButton)FormView1.FindControl("rbdEditFlat")).Checked)
+                {
+                    disctype = "F";
+                }
+                else if (((RadioButton)FormView1.FindControl("rbdEditPercentage")).Checked)
+                {
+                    disctype = "P";
+                }
+                else if (((RadioButton)FormView1.FindControl("rbdEditNone")).Checked)
+                {
+                    disctype = "N";
+                    amount = 0;
+                }
+
+                amount = Convert.ToDouble(((TextBox)FormView1.FindControl("txtEditAmount")).Text);
+
+                if (((RadioButton)FormView1.FindControl("rbdEditVat")).Checked)
+                {
+                    vat = "V";
+                }
+                else if (((RadioButton)FormView1.FindControl("rbdEditNonVat")).Checked)
+                {
+                    vat = "N";
+                }
+
             }
-            else if(Diff[1]=="G")
+            else
             {
                 isex = null;
                 itname = null;
@@ -209,6 +234,9 @@ public partial class Inventory_ItemRelated : System.Web.UI.Page
                 baseunit = null;
                 minstock = 0;
                 maxstock = 0;
+                disctype = null;
+                amount = 0;
+                vat = "N";
 
             }
             lblMsg.Text = itype;
@@ -332,9 +360,9 @@ public partial class Inventory_ItemRelated : System.Web.UI.Page
         if (e.CommandName == "Delete")
         {
             ilevels=0;
-            parent =null;
-            iname = null;
-            itype = null;
+            parent =Diff[0];
+            iname = Diff[1];
+            itype = Diff[1];
             icode = Diff[0];
             isex = null;
             itname = null;

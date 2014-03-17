@@ -120,8 +120,8 @@
                                         <asp:Button ID="btnRegister" runat="server" Text="Register" 
                                             class="btn btn-default" onclick="btnRegister_Click" />
                                 &nbsp;&nbsp;&nbsp;
-                                <asp:Button ID="btnResetPassword" runat="server" Text="Forget Password" 
-                                            class="btn btn-default" onclick="btnResetPassword_Click" />
+                                <%--<asp:Button ID="btnResetPassword" runat="server" Text="Forget Password" 
+                                            class="btn btn-default" onclick="btnResetPassword_Click" />--%>
                                         </br><asp:Label ID="lbmMessage" runat="server" Text="" class="textcolor"></asp:Label>
                                    </div>
 								  </div>

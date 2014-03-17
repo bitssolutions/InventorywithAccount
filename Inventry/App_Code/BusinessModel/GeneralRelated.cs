@@ -47,6 +47,16 @@ public class GeneralRelated
 
     }
 
+    public DataTable CheckUserName(string AName)
+    {
+        SqlParameter[] param = new SqlParameter[2];
+        param[0] = new SqlParameter("@AName", AName);
+        param[1] = new SqlParameter("@IfErrorMsg", SqlDbType.NChar, 254);
+        param[1].Direction = ParameterDirection.Output;
+        ////string strMessage = param[2].Value.ToString();
+        return DataAccessLayer.getTable("CheckUserName", param);
+
+    }
     
 
     public string CheckUserExists(string AName, string APassword)

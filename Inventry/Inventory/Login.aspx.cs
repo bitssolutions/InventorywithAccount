@@ -24,8 +24,8 @@ public partial class Inventory_Login : System.Web.UI.Page
         }
         else
         {
-            //Response.Redirect("../Error.aspx");
-            Response.Redirect(GetRouteUrl("Error",null));
+            Response.Redirect("../Error.aspx");
+            //Response.Redirect(GetRouteUrl("Error",null));
         }
     }
     protected void btnLogin_Click(object sender, EventArgs e)
@@ -36,8 +36,8 @@ public partial class Inventory_Login : System.Web.UI.Page
         }
         else
         {
-            Response.Redirect(GetRouteUrl("Dashboard", null));
-            //Response.Redirect("Dashboard.aspx");
+           // Response.Redirect(GetRouteUrl("Dashboard", null));
+            Response.Redirect("Dashboard.aspx");
         }
     }
 
@@ -58,6 +58,7 @@ public partial class Inventory_Login : System.Web.UI.Page
     {
         string username = Session["username"].ToString();
         string password = Session["password"].ToString();
+        //string pass = Helper.ComputeHash(password, "SHA512", null);
         DataTable dt = obj.getSubDealers(username, password);
         if (dt.Rows.Count>0)
         {

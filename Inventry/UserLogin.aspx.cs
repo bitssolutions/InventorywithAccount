@@ -23,49 +23,98 @@ public partial class UserLogin : System.Web.UI.Page
     
     protected void btnLogin_Click(object sender, EventArgs e)
     {
-        DataTable dt = obj.CheckUserLogin(txtUsername.Text, txtPassword.Text);
-       
+
+        DataTable dt = obj.CheckUserName(txtUsername.Text);
         if (dt.Rows.Count > 0)
         {
-
-            if (dt.Rows[0][3].ToString() == "A")
+            string uid = dt.Rows[0][1].ToString();
+            string pwd = dt.Rows[0][2].ToString();
+            bool flag = Helper.VerifyHash(txtPassword.Text, "SHA512", pwd);
+            if (uid == txtUsername.Text && flag == true)
             {
-                Session.Add("username", txtUsername.Text);
-                Session.Add("password", txtPassword.Text);
-                //string password = dt.Rows[0][2].ToString();
-                if ((dt.Rows[0][1].ToString() == "Admin") || (dt.Rows[0][2].ToString() == "Admin"))
+                if (dt.Rows[0][3].ToString() == "A")
                 {
-                    Session.Add("usercode", dt.Rows[0][0].ToString());
-                    Response.Redirect("~/ChangePassword.aspx");
+                    Session.Add("username", txtUsername.Text);
+                    Session.Add("password", pwd);
+                    //string password = dt.Rows[0][2].ToString();
+                    if ((dt.Rows[0][1].ToString() == "Admin") || (dt.Rows[0][2].ToString() == "Admin"))
+                    {
+                        Session.Add("usercode", dt.Rows[0][0].ToString());
+                        Response.Redirect("~/ChangePassword.aspx");
+                    }
+                    else
+                    {
+                        Session.Add("usercode", dt.Rows[0][0].ToString());
+                       // Response.Redirect(GetRouteUrl("Login", null));
+                         Response.Redirect("~/Inventory/Login.aspx"); //Inventory ma chirne
+                    }
                 }
-                else
+                else if (dt.Rows[0][3].ToString() == "U")
                 {
+                    Session.Add("username", txtUsername.Text);
+                    Session.Add("password", pwd);
                     Session.Add("usercode", dt.Rows[0][0].ToString());
-                    Response.Redirect(GetRouteUrl("Login", null));
-                    // Response.Redirect("~/Inventory/Login.aspx"); //Inventory ma chirne
+                    Response.Redirect("~/Inventory/Login.aspx");
+                   // Response.Redirect(GetRouteUrl("Login", null));
+                }
+                else if (dt.Rows[0][3].ToString() == "R")
+                {
+                    Session.Add("username", txtUsername.Text);
+                    Session.Add("password", pwd);
+                    Session.Add("usercode", dt.Rows[0][0].ToString());
+                    lbmMessage.Text = "You can only access our web portal";
+
                 }
             }
-            else if (dt.Rows[0][3].ToString() == "U")
+            else
             {
-                Session.Add("username", txtUsername.Text);
-                Session.Add("password", txtPassword.Text);
-                Session.Add("usercode", dt.Rows[0][0].ToString());
-                // Response.Redirect("~/Inventory/Login.aspx");
-                Response.Redirect(GetRouteUrl("Login", null));
-            }
-            else if (dt.Rows[0][3].ToString() == "R")
-            {
-                Session.Add("username", txtUsername.Text);
-                Session.Add("password", txtPassword.Text);
-                Session.Add("usercode", dt.Rows[0][0].ToString());
-                lbmMessage.Text = "You can only access our web portal";
-
+                lbmMessage.Text = "Username and Password Mismatch!";
             }
         }
-        else
-        {
-            lbmMessage.Text = "Username and Password doesn't exists!";
-        }
+
+        //DataTable dt = obj.CheckUserLogin(txtUsername.Text, txtPassword.Text);
+
+        //if (dt.Rows.Count > 0)
+        //{
+
+        //    if (dt.Rows[0][3].ToString() == "A")
+        //    {
+        //        Session.Add("username", txtUsername.Text);
+        //        Session.Add("password", txtPassword.Text);
+        //        //string password = dt.Rows[0][2].ToString();
+        //        if ((dt.Rows[0][1].ToString() == "Admin") || (dt.Rows[0][2].ToString() == "Admin"))
+        //        {
+        //            Session.Add("usercode", dt.Rows[0][0].ToString());
+        //            Response.Redirect("~/ChangePassword.aspx");
+        //        }
+        //        else
+        //        {
+        //            Session.Add("usercode", dt.Rows[0][0].ToString());
+        //            Response.Redirect(GetRouteUrl("Login", null));
+        //            // Response.Redirect("~/Inventory/Login.aspx"); //Inventory ma chirne
+        //        }
+        //    }
+        //    else if (dt.Rows[0][3].ToString() == "U")
+        //    {
+        //        Session.Add("username", txtUsername.Text);
+        //        Session.Add("password", txtPassword.Text);
+        //        Session.Add("usercode", dt.Rows[0][0].ToString());
+        //        // Response.Redirect("~/Inventory/Login.aspx");
+        //        Response.Redirect(GetRouteUrl("Login", null));
+        //    }
+        //    else if (dt.Rows[0][3].ToString() == "R")
+        //    {
+        //        Session.Add("username", txtUsername.Text);
+        //        Session.Add("password", txtPassword.Text);
+        //        Session.Add("usercode", dt.Rows[0][0].ToString());
+        //        lbmMessage.Text = "You can only access our web portal";
+
+        //    }
+        //}
+        //else
+        //{
+        //    lbmMessage.Text = "Username and Password doesn't exists!";
+        //}
        
     }
 
@@ -77,8 +126,5 @@ public partial class UserLogin : System.Web.UI.Page
 
 
 
-    protected void btnResetPassword_Click(object sender, EventArgs e)
-    {
-
-    }
+   
 }

@@ -360,15 +360,15 @@
                                         {
                                             if (item.Rows[0][17].ToString() == "F")
                                             {
-                                                 ((RadioButton)FormView1.FindControl("rbdFlat")).Checked=true;
+                                                 ((RadioButton)FormView1.FindControl("rbdEditFlat")).Checked=true;
                                             }
                                             else if (item.Rows[0][17].ToString() == "P")
                                             {
-                                                ((RadioButton)FormView1.FindControl("rbdPercentage")).Checked=true;
+                                                ((RadioButton)FormView1.FindControl("rbdEditPercentage")).Checked=true;
                                             }
                                             else
                                             {
-                                                ((RadioButton)FormView1.FindControl("rbdNone")).Checked = true;
+                                                ((RadioButton)FormView1.FindControl("rbdEditNone")).Checked = true;
                                             }
                                         }
 
@@ -376,11 +376,11 @@
                                         {
                                             if (item.Rows[0][19].ToString()=="V")
                                             {
-                                                ((RadioButton)FormView1.FindControl("rbdVat")).Checked = true;
+                                                ((RadioButton)FormView1.FindControl("rbdEditVat")).Checked = true;
                                             }
                                             else
                                             {
-                                                ((RadioButton)FormView1.FindControl("rbdNonVat")).Checked = true;
+                                                ((RadioButton)FormView1.FindControl("rbdEditNonVat")).Checked = true;
                                             }
                                         }
                                      %>
@@ -388,9 +388,9 @@
                                         <td>
                                             Discount Type</td>
                                         <td>
-                                             <asp:RadioButton ID="rbdFlat" runat="server" Text="Flat" Value="F" GroupName="DiscType" />
-                                             <asp:RadioButton ID="rbdPercentage" runat="server" Text="Percentage" Value="P" GroupName="DiscType"/>
-                                             <asp:RadioButton ID="rbdNone" runat="server" Text="None" Value="N" GroupName="DiscType"/>
+                                             <asp:RadioButton ID="rbdEditFlat" runat="server" Text="Flat" Value="F" GroupName="DiscType" />
+                                             <asp:RadioButton ID="rbdEditPercentage" runat="server" Text="Percentage" Value="P" GroupName="DiscType"/>
+                                             <asp:RadioButton ID="rbdEditNone" runat="server" Text="None" Value="N" GroupName="DiscType"/>
                                         </td>
                                     </tr>
                                     <tr>
@@ -404,8 +404,8 @@
                                         <td>
                                             VAT/None VAT</td>
                                         <td>
-                                             <asp:RadioButton ID="rbdVat" runat="server" Text="VAT" Value="V" GroupName="VATGroup" />
-                                             <asp:RadioButton ID="rbdNonVat" runat="server" Text="Non VAT" Value="N" GroupName="VATGroup"/>
+                                             <asp:RadioButton ID="rbdEditVat" runat="server" Text="VAT" Value="V" GroupName="VATGroup" />
+                                             <asp:RadioButton ID="rbdEditNonVat" runat="server" Text="Non VAT" Value="N" GroupName="VATGroup"/>
                                         </td>
                                     </tr>
                                   <%} %>
