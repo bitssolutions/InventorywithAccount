@@ -70,7 +70,9 @@
                             
 								<li><a href="../Inventory/SubDealerCreate.aspx?SubDealer=SB1" style="font-weight: bolder; font-size: 16px;">Sub-Delear Create</a></li>
                                 <li><a href="#" style="font-weight: bolder; font-size: 16px;">User Create</a></li>
-                                <li><a href="#" style="font-weight: bolder; font-size: 16px;">Opening Stock</a></li>
+                                <li role="presentation" class="divider"></li>
+                                <li><a href="../Inventory/OpeningStock.aspx" style="font-weight: bolder; font-size: 16px;">Opening Stock</a></li>
+                                <li><a href="../Inventory/StockCount.aspx" style="font-weight: bolder; font-size: 16px;">Stock Count</a></li>
                             </ul>
 						</li>
 						<li><a href="#" style="font-weight: bolder; font-size: 16px;"><i class="glyphicon glyphicon-info-sign" style="color:white;"></i> About</a></li>

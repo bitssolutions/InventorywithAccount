@@ -182,4 +182,53 @@ public class MasterRelated
 
     //-------------- End Of Item Related -----------------------------
 
+    //-------------- Opening Stock Related ---------------------------
+    public DataTable OpenItemInfo(string owner,string icode)
+    {
+        SqlParameter[] param = new SqlParameter[2];
+        param[0] = new SqlParameter("@Owner", owner);
+        param[1] = new SqlParameter("@ICode", icode);
+        return DataAccessLayer.getTable("OpenItemInfo", param);
+    }
+
+    public string OpenItemRelated(string icode, double qty, double rate,string owner, string usercode)
+    {
+        SqlParameter[] param = new SqlParameter[6];
+        param[0] = new SqlParameter("@ICode", icode);
+        param[1] = new SqlParameter("@Qty", qty);
+        param[2] = new SqlParameter("@Rate", rate);
+        param[3] = new SqlParameter("@Owner", owner);
+        param[4] = new SqlParameter("@UserCode", usercode);
+        param[5] = new SqlParameter("@IfErrorMsg", SqlDbType.NChar, 254);
+        param[5].Direction = ParameterDirection.Output;
+        DataAccessLayer.ExecuteProc("OpenItemRelated", param);
+        return (param[5].Value.ToString()).Trim();
+    }
+
+    //------------- End of Openning Stock Related --------------------
+
+    //-------------- Stock Count Related ---------------------------
+    public DataTable StockCountInfo(string owner, string icode)
+    {
+        SqlParameter[] param = new SqlParameter[2];
+        param[0] = new SqlParameter("@Owner", owner);
+        param[1] = new SqlParameter("@ICode", icode);
+        return DataAccessLayer.getTable("StockCountInfo", param);
+    }
+
+    public string StockCountItemRelated(string icode, double qty, double rate, string owner, string usercode)
+    {
+        SqlParameter[] param = new SqlParameter[6];
+        param[0] = new SqlParameter("@ICode", icode);
+        param[1] = new SqlParameter("@Qty", qty);
+        param[2] = new SqlParameter("@Rate", rate);
+        param[3] = new SqlParameter("@Owner", owner);
+        param[4] = new SqlParameter("@UserCode", usercode);
+        param[5] = new SqlParameter("@IfErrorMsg", SqlDbType.NChar, 254);
+        param[5].Direction = ParameterDirection.Output;
+        DataAccessLayer.ExecuteProc("StockCountItemRelated", param);
+        return (param[5].Value.ToString()).Trim();
+    }
+
+    //------------- End of  Stock Count Related --------------------
 }

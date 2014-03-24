@@ -71,7 +71,7 @@ public partial class UserLogin : System.Web.UI.Page
                 lbmMessage.Text = "Username and Password Mismatch!";
             }
         }
-
+        
         //DataTable dt = obj.CheckUserLogin(txtUsername.Text, txtPassword.Text);
 
         //if (dt.Rows.Count > 0)
@@ -117,7 +117,7 @@ public partial class UserLogin : System.Web.UI.Page
         //}
        
     }
-
+    
     protected void btnRegister_Click(object sender, EventArgs e)
     {
         Response.Redirect("~/Registration.aspx");

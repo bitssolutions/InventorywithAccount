@@ -434,4 +434,5 @@ public partial class Inventory_ItemRelated : System.Web.UI.Page
         DataTable editwholesalerate = itemobj.getWholeSaleRate(ewr);
         ((TextBox)FormView1.FindControl("txtEditWRate")).Text = editwholesalerate.Rows[0][0].ToString();
     }
+   
 }
