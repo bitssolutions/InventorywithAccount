@@ -138,6 +138,8 @@
                         </asp:FormView>
                          <asp:Label ID="lblMsg" runat="server" Text=""></asp:Label>
                     </div>
+                    <asp:GridView ID="GridView1" runat="server">
+                    </asp:GridView>
                 </div>
             </div>
         </div>

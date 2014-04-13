@@ -191,6 +191,7 @@ public class MasterRelated
         return DataAccessLayer.getTable("OpenItemInfo", param);
     }
 
+   
     public string OpenItemRelated(string icode, double qty, double rate,string owner, string usercode)
     {
         SqlParameter[] param = new SqlParameter[6];

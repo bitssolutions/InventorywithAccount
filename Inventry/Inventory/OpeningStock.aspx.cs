@@ -18,6 +18,15 @@ public partial class Inventory_OpeningStock : System.Web.UI.Page
             {
                 lblUsername.Text = UppercaseFirst(Session["username"].ToString());
                 //lblDetail.Text = "N";
+                DataTable dtSource = new DataTable();
+                dtSource.Columns.Add("Item Code");
+                dtSource.Columns.Add("Quantity");
+                dtSource.Columns.Add("Rate");
+                dtSource.Columns.Add("Owner");
+                dtSource.Columns.Add("UserCode");
+                ViewState["dtSource"] = dtSource;
+                GridView1.DataSource = dtSource;
+                GridView1.DataBind();
             }
         }
         else
@@ -51,6 +60,8 @@ public partial class Inventory_OpeningStock : System.Web.UI.Page
             ((TextBox)FormView1.FindControl("txtNewRate")).Text = dt.Rows[0][6].ToString();
         }
     }
+
+    
 
     protected void clearnloadformview(object sender, FormViewCommandEventArgs e)
     {
@@ -86,6 +97,23 @@ public partial class Inventory_OpeningStock : System.Web.UI.Page
             if (chkmsg == "1")
             {
                 clearnloadformview(sender, e);
+               
+                //loadOpenStockGrid();
+                DataTable dtSource = ViewState["dtSource"] as DataTable;
+
+                DataRow dr = dtSource.NewRow();
+                dr["Item Code"] = icode;
+                dr["Quantity"] = qty;
+                dr["Rate"] = rate;
+                dr["Owner"] = owner;
+                dr["UserCode"] = ucode;
+                dtSource.Rows.Add(dr);
+                GridView1.DataSource = dtSource;
+                GridView1.DataBind();
+
+                
+ 
+
             }
             lblMsg.Text = help.Left(msg, msg.Length - 1);
         }
