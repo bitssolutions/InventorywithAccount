@@ -1,0 +1,7 @@
+D:\Birenedra\Inventory\Service\bin\Debug\Service.dll
+D:\Birenedra\Inventory\Service\bin\Debug\Service.pdb
+D:\Birenedra\Inventory\Service\bin\Debug\Domain.dll
+D:\Birenedra\Inventory\Service\bin\Debug\Domain.pdb
+D:\Birenedra\Inventory\Service\obj\Debug\ResolveAssemblyReference.cache
+D:\Birenedra\Inventory\Service\obj\Debug\Service.dll
+D:\Birenedra\Inventory\Service\obj\Debug\Service.pdb

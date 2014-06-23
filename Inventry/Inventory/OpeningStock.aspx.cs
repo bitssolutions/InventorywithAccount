@@ -6,6 +6,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 
+
+
 public partial class Inventory_OpeningStock : System.Web.UI.Page
 {
     MasterRelated obj = new MasterRelated();

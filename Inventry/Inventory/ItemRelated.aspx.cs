@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 
+
 public partial class Inventory_ItemRelated : System.Web.UI.Page
 {
     MasterRelated itemobj = new MasterRelated();
@@ -20,9 +21,7 @@ public partial class Inventory_ItemRelated : System.Web.UI.Page
                 lblUsername.Text = UppercaseFirst(Session["username"].ToString());
                 TreeView1.Nodes.Clear();
                 AddTopTreeViewNodes();
-
                 //loadFormView();
-                
                 //lblDetail.Text = "N";
             }
         }
@@ -60,7 +59,7 @@ public partial class Inventory_ItemRelated : System.Web.UI.Page
 
     private void AddChildTreeViewNodes(string parentCode)
     {
-        DataTable treeViewDatas = itemobj.LoadItemListTreeView(parentCode);
+        DataTable treeViewDatas = itemobj.LoadItemListTreeView(parentCode,"A");
         if (treeViewDatas.Rows.Count > 0)
         {
             DataView view = new DataView(treeViewDatas);

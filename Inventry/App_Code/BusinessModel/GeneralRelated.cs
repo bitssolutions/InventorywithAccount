@@ -112,4 +112,11 @@ public class GeneralRelated
         param[2].Direction = ParameterDirection.Output;
         return DataAccessLayer.getTable("SubDealerLists", param);
     }
+
+    //Get System Date,Fiscal Year,HO Margin,VAT,Dealer etc
+    public DataTable getSystemDate()
+    {
+        SqlParameter[] param = new SqlParameter[1];
+        return DataAccessLayer.getTable("SystemStatus", null);
+    }
 }

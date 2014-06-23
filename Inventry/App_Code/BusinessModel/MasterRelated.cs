@@ -139,10 +139,11 @@ public class MasterRelated
     }
 
     // To Load Item Treeview Structure
-    public DataTable LoadItemListTreeView(string parent)
+    public DataTable LoadItemListTreeView(string parent, string status)
     {
-        SqlParameter[] param = new SqlParameter[1];
+        SqlParameter[] param = new SqlParameter[2];
         param[0] = new SqlParameter("@Parent", parent);
+        param[1] = new SqlParameter("@Status", status);
         return DataAccessLayer.getTable("ItemListsTreeView", param);
     }
 
@@ -154,8 +155,8 @@ public class MasterRelated
         return DataAccessLayer.getTable("ItemInfo", param);
     }
 
-    //Load Supplier/provider lists
-    public DataTable getSubppliers(string parent,string owner, string usercode,string accountoritem)
+    //Load Supplier/provider lists for Item Master
+    public DataTable getSubppliers(string parent, string owner, string usercode, string accountoritem)
     {
         SqlParameter[] param = new SqlParameter[4];
         param[0] = new SqlParameter("@Parent", parent);
@@ -164,6 +165,24 @@ public class MasterRelated
         param[3] = new SqlParameter("@AccountOrItem", accountoritem);
         return DataAccessLayer.getTable("ParentToChildEnd", param);
     }
+
+    //Load Supplier/provider lists for Purchase
+    public DataTable AccountListforPurchase(string owner, string usercode)
+    {
+        SqlParameter[] param = new SqlParameter[2];
+        param[0] = new SqlParameter("@Owner", owner);
+        param[1] = new SqlParameter("@UserCode", usercode);
+        return DataAccessLayer.getTable("AccountListforPurchase", param);
+    }
+    //Load Client Lists for Sales
+    public DataTable AccountListforSales(string owner, string usercode)
+    {
+        SqlParameter[] param = new SqlParameter[2];
+        param[0] = new SqlParameter("@Owner", owner);
+        param[1] = new SqlParameter("@UserCode", usercode);
+        return DataAccessLayer.getTable("AccountListforSales", param);
+    }
+   
 
     //Load Item Base Units
     public DataTable getItemBaseUnit()
@@ -231,5 +250,20 @@ public class MasterRelated
         return (param[5].Value.ToString()).Trim();
     }
 
+    public string bulkInsertCheck(DataTable ItemDetails)
+    {
+        SqlParameter[] param = new SqlParameter[2];
+        param[0] = new SqlParameter("@ItemsDetails", ItemDetails);
+        param[1] = new SqlParameter("@IfErrorMsg", SqlDbType.NChar, 254);
+        param[1].Direction = ParameterDirection.Output;
+        DataAccessLayer.ExecuteProc("ChecktTablePara", param);
+        return (param[1].Value.ToString()).Trim();
+    }
+
     //------------- End of  Stock Count Related --------------------
+
+   
+
+    
+
 }
